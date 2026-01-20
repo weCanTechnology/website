@@ -24,7 +24,7 @@ jobs:
       - name: Install, build, and upload your site
         uses: withastro/action@v3
         with:
-          path: ./website
+          path: ./
 
   deploy:
     needs: build
