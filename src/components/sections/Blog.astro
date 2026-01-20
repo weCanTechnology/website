@@ -1,0 +1,136 @@
+---
+// src/components/sections/Blog.astro
+import type { BlogPost } from "../../types";
+import SectionHeader from "../global/SectionHeader.astro";
+
+export interface Props {
+  blogPosts: BlogPost[];
+  isPage?: boolean;
+  gridColumns?: number;
+}
+
+const { blogPosts, isPage = false, gridColumns = 3 } = Astro.props;
+---
+
+<section id="blog" class="blog-section">
+  <div class="container">
+    <SectionHeader
+      title="Blog"
+      linkHref="https://www.linkedin.com/company/wecan-technology/posts/"
+      linkText="View all blog posts" 
+    />
+
+    <div class="blog-grid">
+      {
+        blogPosts.map((post) => (
+          <a href={post.link} class="blog-card">
+            <img src={post.image} alt={post.title} class="card-image" />
+            <div class="card-content">
+              <p class="post-date">{post.date}</p>
+              <h4>{post.title}</h4>
+            </div>
+          </a>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .blog-section {
+    background-color: white;
+  }
+  .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 3rem;
+  }
+
+  .section-header-wrapper {
+    margin-bottom: 0;
+  }
+
+  .section-header h2 {
+    color: var(--color-background-dark);
+  }
+
+  .view-all-link {
+    color: var(--color-primary-blue);
+    font-weight: 600;
+    font-size: 1.125rem;
+  }
+
+  .blog-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    padding-top: 56px;
+  }
+
+  .blog-card {
+    background-color: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    text-decoration: none;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    transition:
+      transform 0.3s ease;
+      box-shadow 0.3s ease;
+
+    position: relative;
+    z-index: 1;
+  }
+
+  .blog-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+    z-index: 10;
+  }
+
+ .card-image {
+    width: 100%;
+    display: block; 
+    aspect-ratio: 16 / 9;
+    object-fit: cover;     
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  .card-content {
+    padding: 1.5rem;
+  }
+
+  .post-date {
+    color: #3B3C3E;
+    font-family: font-family: var(--font-family-base);
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1.3; /* 130% */
+    letter-spacing: 3.6px;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+
+  .card-content h4 {
+    color: var(--color-text-dark); 
+    font-size: var(--h4-size); 
+    font-weight: 400; 
+    line-height: 1.3; 
+  }
+
+    /* --- MOBIL & TABLET --- */
+  @media (max-width: 1024px) {
+    .blog-grid {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      padding-top: 2rem;
+    }
+
+    .card-content h4 {
+      font-size: 20px; 
+    }
+  }
+</style>

@@ -1,0 +1,437 @@
+---
+import { servicesData } from "../../data/content";
+import SectionHeader from "../global/SectionHeader.astro";
+
+const { title, subtitle, items } = servicesData;
+---
+
+<section class="services-section" id="services">
+  <div class="container">
+    <div class="content-grid">
+      <div class="text-column">
+        <SectionHeader title={title} />
+        <div>
+          <p class="service-subtitle">{subtitle}</p>
+        </div>
+      </div>
+
+      <div class="visual-column">
+        <div class="stack-wrapper">
+          <div class="card-stack" id="cardStack">
+            {
+              items.map((item, index) => (
+                <div
+                  class={`service-card 
+                  ${index === 0 ? "active" : ""} 
+                  ${index === items.length - 1 ? "prev" : ""} 
+                  ${index === 1 ? "next" : ""}
+                `}
+                  data-index={index}
+                >
+                  <div class="icon-wrapper">
+                    <img
+                      src={item.icon}
+                      alt={item.title}
+                      class="service-icon"
+                    />
+                  </div>
+
+                  <div class="text-content">
+                    <h3>{item.title}</h3>
+                    <p>{item.description}</p>
+                  </div>
+
+                  <div class="click-zone left" />
+                  <div class="click-zone right" />
+                </div>
+              ))
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const stack = document.getElementById("cardStack");
+  const prevBtn = document.getElementById("prevBtn");
+  const nextBtn = document.getElementById("nextBtn");
+  const section = document.querySelector(".services-section");
+
+  if (stack) {
+    const cards = Array.from(stack.querySelectorAll(".service-card"));
+    let currentIndex = 0;
+    const totalCards = cards.length;
+
+    let autoPlayInterval;
+    const AUTOPLAY_DELAY = 3000;
+    let isPaused = false;
+
+    const updateClasses = () => {
+      cards.forEach((card, index) => {
+        card.classList.remove("active", "prev", "next", "hidden");
+
+        const prevIndex = (currentIndex - 1 + totalCards) % totalCards;
+        const nextIndex = (currentIndex + 1) % totalCards;
+
+        if (index === currentIndex) {
+          card.classList.add("active");
+        } else if (index === prevIndex) {
+          card.classList.add("prev");
+        } else if (index === nextIndex) {
+          card.classList.add("next");
+        } else {
+          card.classList.add("hidden");
+        }
+      });
+    };
+
+    const goToNext = (isManual = false) => {
+      currentIndex = (currentIndex + 1) % totalCards;
+      updateClasses();
+      if (isManual) resetAutoPlay();
+    };
+
+    const goToPrev = (isManual = false) => {
+      currentIndex = (currentIndex - 1 + totalCards) % totalCards;
+      updateClasses();
+      if (isManual) resetAutoPlay();
+    };
+
+    const startAutoPlay = () => {
+      if (autoPlayInterval) clearInterval(autoPlayInterval);
+      autoPlayInterval = setInterval(() => {
+        if (!isPaused) {
+          goToNext();
+        }
+      }, AUTOPLAY_DELAY);
+    };
+
+    const stopAutoPlay = () => {
+      if (autoPlayInterval) clearInterval(autoPlayInterval);
+    };
+
+    const resetAutoPlay = () => {
+      stopAutoPlay();
+      startAutoPlay();
+    };
+
+    if (nextBtn) nextBtn.addEventListener("click", () => goToNext(true));
+    if (prevBtn) prevBtn.addEventListener("click", () => goToPrev(true));
+
+    cards.forEach((card) => {
+      card.addEventListener("click", (e) => {
+        // @ts-ignore
+        if (card.classList.contains("prev")) {
+          goToPrev(true);
+          return;
+        }
+        // @ts-ignore
+        if (card.classList.contains("next")) {
+          goToNext(true);
+          return;
+        }
+        // @ts-ignore
+        if (!card.classList.contains("active")) return;
+
+        const rect = card.getBoundingClientRect();
+        // @ts-ignore
+        const clickX = e.clientX - rect.left;
+
+        if (clickX < rect.width / 2) {
+          goToPrev(true);
+        } else {
+          goToNext(true);
+        }
+      });
+    });
+
+    stack.addEventListener("mouseenter", () => {
+      isPaused = true;
+    });
+    stack.addEventListener("mouseleave", () => {
+      isPaused = false;
+    });
+
+    const navContainer = document.querySelector(".slider-nav");
+    if (navContainer) {
+      navContainer.addEventListener("mouseenter", () => {
+        isPaused = true;
+      });
+      navContainer.addEventListener("mouseleave", () => {
+        isPaused = false;
+      });
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            startAutoPlay();
+          } else {
+            stopAutoPlay();
+          }
+        });
+      },
+      { threshold: 0.3 }
+    );
+
+    if (section) observer.observe(section);
+
+    updateClasses();
+  }
+</script>
+
+<style>
+  .container {
+    width: 100%;
+    padding-left: var(--container-padding-x, 24px);
+    padding-right: var(--container-padding-x, 24px);
+  }
+
+  .content-grid {
+    display: grid;
+    grid-template-columns: 450px 1fr;
+    align-items: center;
+    gap: 4rem;
+  }
+
+  .text-column {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+    padding-right: 0;
+    max-width: 500px;
+    z-index: 20;
+    position: relative;
+  }
+
+  .service-subtitle {
+    color: var(--color-1);
+    font-family: var(--font-family-base);
+    font-size: var(--h3-size);
+    font-weight: 400;
+    line-height: 140%;
+    margin-top: 32px;
+  }
+
+  .visual-column {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    overflow: visible;
+  }
+
+  .stack-wrapper {
+    position: relative;
+    width: 100%;
+    height: 600px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    perspective: 1000px;
+    z-index: 1;
+  }
+
+  .stack-wrapper::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 110%;
+    transform: translate(-50%, -50%);
+    width: 120%;
+    height: 70%;
+    background: linear-gradient(135deg, var(--color-8), var(--color-3));
+    opacity: 0.6;
+    filter: blur(80px);
+    border-radius: 40%;
+    z-index: -1;
+    pointer-events: none;
+  }
+
+  .card-stack {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 5;
+  }
+
+  .service-card {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    width: 347px;
+    height: 480px;
+    padding: 40px;
+
+    border-radius: 32px;
+    border: 1.893px solid #fff;
+    background: #ffffff;
+
+    transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+    box-shadow: 0 25px 50px -12px rgba(24, 46, 196, 0.15);
+    overflow: hidden;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .icon-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    margin-bottom: 40px;
+  }
+
+  .service-icon {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .text-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    gap: 20px;
+  }
+
+  .service-card h3 {
+    color: var(--color-1);
+    font-family: var(--font-family-base);
+    font-weight: 800;
+    font-size: 52px;
+    line-height: 110%;
+    text-align: left;
+    margin: 0;
+    min-height: 120px;
+    display: flex;
+    align-items: center;
+  }
+
+  .service-card p {
+    color: #475569;
+    font-size: 18px;
+    line-height: 1.5;
+    margin: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .service-card.active {
+    opacity: 1;
+    z-index: 10;
+    transform: translate(-50%, -50%) scale(1);
+    pointer-events: auto;
+  }
+
+  .service-card.prev {
+    opacity: 0.6;
+    z-index: 5;
+    pointer-events: auto;
+    cursor: pointer;
+    filter: blur(2px);
+    transform: translate(calc(-50% - 360px), -50%) scale(0.85);
+  }
+
+  .service-card.next {
+    opacity: 0.6;
+    z-index: 5;
+    pointer-events: auto;
+    cursor: pointer;
+    filter: blur(2px);
+    transform: translate(calc(-50% + 360px), -50%) scale(0.85);
+  }
+
+  .service-card.hidden {
+    opacity: 0;
+    z-index: 0;
+    transform: translate(-50%, -50%) scale(0.5);
+  }
+
+  .click-zone {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 50%;
+    z-index: 2;
+    cursor: pointer;
+  }
+  .click-zone.left {
+    left: 0;
+  }
+  .click-zone.right {
+    right: 0;
+  }
+
+  /* mobil&tablet */
+  @media (max-width: 1024px) {
+    .content-grid {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+
+    .text-column {
+      max-width: 100%;
+      align-items: flex-start;
+      text-align: left;
+    }
+
+    .service-subtitle {
+      font-size: var(--h4-size);
+      margin-top: 1rem;
+    }
+
+    .stack-wrapper {
+      height: 500px;
+    }
+
+    .service-card {
+      width: 280px;
+      height: 420px;
+      padding: 30px;
+    }
+
+    .service-card h3 {
+      font-size: 36px;
+      min-height: 90px;
+    }
+
+    .service-card p {
+      font-size: 16px;
+    }
+
+    .icon-wrapper {
+      margin-bottom: 20px;
+    }
+
+    .service-card.prev {
+      transform: translate(calc(-50% - 40px), -50%) scale(0.9);
+      opacity: 0.5;
+      filter: blur(1px);
+    }
+
+    .service-card.next {
+      transform: translate(calc(-50% + 40px), -50%) scale(0.9);
+      opacity: 0.5;
+      filter: blur(1px);
+    }
+  }
+</style>

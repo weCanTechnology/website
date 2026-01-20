@@ -1,0 +1,320 @@
+---
+// src/components/sections/Hero.astro
+import { heroContent, typeWriterTexts } from "../../data/content";
+import "../../styles/global.css";
+---
+
+<section class="hero-section">
+  <video class="hero-video" autoplay muted loop playsinline>
+    <source
+      src={import.meta.env.BASE_URL + "/videos/hero-background.mp4"}
+      type="video/mp4"
+    />
+  </video>
+
+  <div class="background-overlay"></div>
+
+  <a
+    href="#services"
+    class="scroll-indicator"
+    aria-label="Görgetés a következő részhez"
+  >
+    <div class="indicator-track"></div>
+    <svg
+      class="indicator-arrow"
+      width="15"
+      height="17"
+      viewBox="0 0 15 17"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M6.65666 16.7071C7.04719 17.0976 7.68035 17.0976 8.07088 16.7071L14.4348 10.3431C14.8254 9.95262 14.8254 9.31946 14.4348 8.92893C14.0443 8.53841 13.4111 8.53841 13.0206 8.92893L7.36377 14.5858L1.70692 8.92893C1.31639 8.53841 0.683226 8.53841 0.292702 8.92893C-0.0978223 9.31946 -0.0978222 9.95262 0.292702 10.3431L6.65666 16.7071ZM7.36377 0L6.36377 4.37114e-08L6.36377 16L7.36377 16L8.36377 16L8.36377 -4.37114e-08L7.36377 0Z"
+        fill="currentColor"></path>
+    </svg>
+  </a>
+
+  <div class="container hero-content">
+    <h1>
+      <Fragment set:html={heroContent.text} />
+    </h1>
+
+    <div class="typewriter-wrapper">
+      <span class="static-text">We </span>
+      <span class="typewriter-text"></span><span class="cursor">&nbsp;</span>
+    </div>    
+  </div>
+</section>
+
+<script define:vars={{ typeWriterTexts }}>
+  const textElement = document.querySelector(".typewriter-text");
+
+  let textIndex = 0;
+  let charIndex = 0;
+  let isDeleting = false;
+
+  const typingSpeed = 100;
+  const deletingSpeed = 50;
+  const pauseEnd = 2000; 
+  const pauseStart = 500; 
+
+  function type() {
+    if (!textElement) return;
+
+    const currentFullText = typeWriterTexts[textIndex];
+
+    if (isDeleting) {
+      textElement.textContent = currentFullText.substring(0, charIndex - 1);
+      charIndex--;
+    } else {
+      textElement.textContent = currentFullText.substring(0, charIndex + 1);
+      charIndex++;
+    }
+
+    let typeSpeed = isDeleting ? deletingSpeed : typingSpeed;
+
+    if (!isDeleting && charIndex === currentFullText.length) {
+      typeSpeed = pauseEnd;
+      isDeleting = true;
+    } else if (isDeleting && charIndex === 0) {
+      isDeleting = false;
+      textIndex = (textIndex + 1) % typeWriterTexts.length;
+      typeSpeed = pauseStart;
+    }
+
+    setTimeout(type, typeSpeed);
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    if (typeWriterTexts.length) setTimeout(type, 1000);
+  });
+</script>
+
+<style>
+  .hero-section {
+    position: relative;
+
+    width: 100%;
+    height: 100vh;
+    height: 100svh;
+    min-height: 500px;
+
+    padding: 4rem 0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .hero-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+  }
+
+  .background-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(25, 46, 197, 0.7);
+    mix-blend-mode: multiply;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  .container {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+
+    color: white;
+    font-family: var(--font-family-base);
+    font-size: var(--h1-size);
+    font-weight: 200;
+
+    line-height: 1.2;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .typewriter-wrapper {
+    margin-top: 56px;
+    margin-bottom: 3rem;
+    text-align: left;
+
+    color: var(--WeCan-teal-500, #20bbbd);
+    font-family: var(--font-family-base);
+    font-size: var(--Static-Display-Small-Size, 36px);
+    font-style: normal;
+    font-weight: 400; 
+    line-height: var(--Static-Display-Small-Line-Height, 44px);
+    letter-spacing: var(--Static-Display-Medium-Tracking, 0);
+  }
+
+  .static-text {
+  }
+
+  .cursor {
+    display: inline-block;
+    width: 2px;
+    background-color: var(--WeCan-teal-500, #20bbbd);
+    animation: blink 1s infinite;
+  }
+
+  @keyframes blink {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0;
+    }
+  }
+
+  .scroll-indicator {
+    position: absolute;
+    z-index: 10;
+    right: var(--container-padding-x);
+    top: 70vh;
+
+    width: 50px;
+    height: 50px;
+    border-radius: 25px;
+    opacity: 50;
+
+    border: none;
+    background: linear-gradient(180deg, #192ec500 0%, #20bebd 100%);
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    padding-bottom: 15px;
+
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.3s ease;
+
+    animation: openCapsuleDown 1.4s cubic-bezier(0.22, 0.61, 0.36, 1) forwards
+      1s;
+  }
+
+  .scroll-indicator:hover {
+    height: 120px;
+    background: linear-gradient(
+      180deg,
+      rgba(25, 46, 197, 0) 0%,
+      var(--WeCan-teal-500, #20bebd) 120%
+    );
+  }
+
+  .indicator-arrow {
+    opacity: 0;
+    animation:
+      fadeInArrow 0.8s ease forwards 2.2s,
+      bounceArrow 3s infinite 3s;
+  }
+
+  .indicator-arrow path {
+    fill: #ffffff; 
+  }
+
+  @keyframes openCapsuleDown {
+    0% {
+      height: 50px; 
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    100% {
+      height: 110px; 
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fadeInArrow {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes floatingArrow {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-8px); 
+    }
+  }
+
+  /* mobil */
+  @media (max-width: 768px) {
+    .hero-section {
+      height: 100svh;
+      padding-top: 80px;
+      align-items: center;
+    }
+
+    .hero-content {
+      align-items: flex-start;
+      max-width: 100%; 
+      text-align: left; 
+    }
+
+    h1 {
+      font-size: var(--h1-size);
+      line-height: 1.2;
+      margin-bottom: 1rem;
+      max-width: 100%; 
+      word-wrap: break-word; 
+    }
+
+    .typewriter-wrapper {
+      font-size: 24px; 
+      margin-top: 1rem;
+      min-height: 60px;
+    }
+    .scroll-indicator {
+      right: 1rem;
+      bottom: -1.5rem;
+      transform: scale(0.8); 
+    }
+  }
+
+  /* tablet */
+  @media (max-width: 1024px) {
+    .hero-content {
+      margin-left: 0;
+    }
+    
+    .hero-section {
+      padding: 8rem 0;
+    }
+  
+    .typewriter-wrapper {
+      font-size: 24px; 
+      line-height: 32px;
+    }
+  }
+</style>

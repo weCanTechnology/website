@@ -1,0 +1,290 @@
+---
+import { jobPositions } from "../../data/content";
+import SectionHeader from "../global/SectionHeader.astro";
+
+const whatWeOffer = [
+  "Work with cutting-edge technologies in a dynamic, fast-moving environment.",
+  "Join a supportive, fun, and innovative team where creativity and collaboration thrive.",
+  "Enjoy professional development opportunities, including mentorship and leadership growth.",
+  "Receive a competitive salary and benefits package that recognizes your expertise.",
+  "Enjoy the possibility of full remote work.",
+];
+---
+
+<section id="career" class="open-positions-section">
+  <div class="container">
+    <SectionHeader title="Career" />
+
+    <h2>Open Positions:</h2>
+    <div class="positions-list">
+      {
+        jobPositions.map((job) => (
+          <article class="job-item">
+            <div class="job-details">
+              <h3>{job.title}</h3>
+              <p>{job.description}</p>
+              <div class="job-tags">
+                {job.tags.map((tag) => (
+                  <span class="job-tag">{tag}</span>
+                ))}
+              </div>
+            </div>
+            <a
+              href="https://www.linkedin.com/company/wecan-technology/jobs/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="apply-link"
+            >
+              <span class="arrow-icon">
+                <img
+                  src={import.meta.env.BASE_URL + "/icons/arrow-learn-more.svg"}
+                  alt=""
+                  class="arrow-default"
+                />
+                <img
+                  src={
+                    import.meta.env.BASE_URL +
+                    "/icons/arrow-learn-more-hover.svg"
+                  }
+                  alt=""
+                  class="arrow-hover"
+                />
+              </span>
+              <span>Apply</span>
+            </a>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .page-content {
+    padding-top: 120px;
+    background-color: white;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .container :global(.section-header) {
+    margin-bottom: 56px;
+  }
+
+  .intro-section {
+    max-width: 991px;
+    position: relative; 
+    z-index: 2; 
+    margin-bottom: -2rem; 
+    padding: 1.5rem; 
+    background-color: white; 
+
+    max-width: 1000px; 
+    margin-left: 0; 
+    margin-right: auto; 
+  }
+
+  .intro-section > p {
+    color: #434343;
+    font-family: var(--font-family-base);
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 139%;
+  }
+
+  .page-content::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0px;
+    width: 900px;
+    height: 900px;
+    z-index: 5;
+    opacity: 1;
+    background-image: url("website/icons/about-us-background.svg");
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+
+  .list-wrapper {
+    margin-top: 2rem; 
+    padding-left: 30%; 
+    position: relative; 
+    z-index: 1; 
+    margin-bottom: 4rem; 
+  }
+
+  .list-wrapper ul {
+    list-style: none;
+    padding-top: 0;
+    padding-left: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-width: 8000px; 
+  }
+
+  .list-wrapper li {
+    padding-left: 2rem;
+    position: relative;
+    font-size: 16px;
+    color: #434343;
+    font-weight: 400;
+    line-height: 212%;
+  }
+
+  .list-wrapper li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 10px;
+    height: 10px;
+    background: #182ec4;
+  }
+
+  .open-positions-section {
+    background-color: white;
+    padding-bottom: 161px;
+    position: relative; 
+    z-index: 1;
+  }
+
+  .open-positions-section h2 {
+    color: var(--color-button-primary, #182ec4);
+    font-family: var(--font-family-base);
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 140%;
+    margin-bottom: 3rem;
+  }
+
+  .positions-list {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .job-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2.5rem 0;
+    border-bottom: 1px solid #182ec4; 
+  }
+
+  .job-item:first-of-type {
+    border-top: 1px solid #182ec4;
+    padding-top: 2.5rem;
+  }
+
+  .job-item:last-of-type {
+    border-bottom: none;
+  }
+
+  .job-details h3 {
+    color: var(--color-button-primary, #182ec4);
+    font-family: var(--font-family-base);
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 140%;
+    margin-bottom: 0.5rem;
+  }
+
+  .job-details p {
+    color: var(--color-text-secondary);
+    margin-bottom: 1.5rem;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 134%;
+  }
+
+  .job-tags {
+    display: flex;
+    gap: 0.75rem;
+  }
+
+  .job-tag {
+    display: inline-flex;
+    padding: 8px 16px;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+   
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 130%; 
+    color: var(--color-button-primary); 
+
+    position: relative; 
+    background-clip: padding-box; 
+    border: 1px solid transparent; 
+    border-radius: 25px; 
+    background:
+      linear-gradient(white, white) padding-box,
+      linear-gradient(155deg, #192ec5 7.05%, #20bebd 100%) border-box;
+    z-index: 0;
+  }
+
+  .apply-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 20px; 
+    font-weight: 500;
+    color: var(--color-accent-teal);
+    transition: color 0.2s ease-in-out;
+    white-space: nowrap;
+  }
+
+  .apply-link:hover {
+    color: var(--color-accent-teal-dark);
+  }
+
+  .apply-link .arrow-icon {
+    position: relative;
+    width: 17px;
+    height: 17px;
+  }
+
+  .apply-link .arrow-icon img {
+    position: absolute;
+    transition: opacity 0.2s ease-in-out;
+  }
+
+  .apply-link .arrow-hover {
+    opacity: 0;
+  }
+
+  .apply-link:hover .arrow-default {
+    opacity: 0;
+  }
+
+  .apply-link:hover .arrow-hover {
+    opacity: 1;
+  }
+
+  @media (max-width: 768px) {
+    .job-item {
+      flex-direction: column; 
+      align-items: flex-end; 
+      gap: 1.5rem; 
+    }
+
+    .job-details {
+      width: 100%;
+    }
+
+    .apply-link {
+      align-self: flex-end; 
+      margin-top: 0.5rem;
+    }
+
+    .job-details h3 {
+      font-size: 20px;
+    }
+  }
+</style>

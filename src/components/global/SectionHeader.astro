@@ -1,0 +1,20 @@
+---
+// src/components/global/SectionHeader.astro
+interface Props {
+  title: string;
+  linkHref?: string;
+  linkText?: string;
+}
+
+const { title, linkHref, linkText } = Astro.props;
+---
+
+<div class="section-header">
+  <div class="section-title-wrapper">
+    <h2 class="section-title">{title}</h2>
+    <img src={import.meta.env.BASE_URL +"/icons/underscore.svg"} alt="underscore" class="title-underscore" />
+  </div>
+  {linkHref && linkText && (
+    <a href={linkHref} class="cta-link">{linkText} →</a>
+  )}
+</div>

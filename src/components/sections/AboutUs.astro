@@ -1,0 +1,547 @@
+---
+// src/components/sections/AboutUs.astro
+import {
+  aboutUsContent,
+  stats,
+  clients,
+  globalCoverageContent,
+} from "../../data/content";
+import SectionHeader from "../global/SectionHeader.astro";
+---
+
+<section class="client-logos-wrapper">
+  <div class="client-logos-scroller-row">
+    <div class="client-logos-scroller">
+      {
+        [...clients, ...clients, ...clients].map((client, index) => (
+          <div class="client-logo-item">
+            <img
+              src={client.logo}
+              alt={`${client.name} logo`}
+              class={`client-logo-img logo-${client.name.toLowerCase().replace(/\s+/g, "")}`}
+              loading={index < 10 ? "eager" : "lazy"}
+            />
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<section id="aboutUs" class="about-section">
+  <div class="container">
+    <div class="about-grid">
+      <div class="content-column">
+        <SectionHeader title={aboutUsContent.title} />
+        <p class="about-desc">{aboutUsContent.desc}</p>
+      </div>
+      <div class="content-column">
+        <ul class="value-prop-list">
+          {
+            aboutUsContent.content.map((point, index) => {
+              const [title, description] = point.split("\n");
+              return (
+                <li class="value-item">
+                  <div class="icon-wrapper">
+                    <img
+                     src={import.meta.env.BASE_URL + `/icons/about-us-icon-${index + 1}.svg`}}
+                      alt=""
+                      class="value-icon"
+                    />
+                  </div>
+                  <div class="text-content">
+                    <span class="list-title">{title}</span>
+                    <span class="value-text">{description}</span>
+                  </div>
+                </li>
+              );
+            })
+          }
+        </ul>
+      </div>
+    </div>
+
+    <div class="stats-container" id="stats-counter">   
+      {
+        stats.map((stat, index) => {
+          const number = parseInt(stat.number, 10);
+          const suffix = stat.number.replace(String(number), "");
+          return (
+            <>
+              <div class="stat-item">
+                <span
+                  class="stat-number"
+                  data-target-value={number}
+                  data-suffix={suffix}
+                >
+                  0{suffix}
+                </span>
+                <p class="stat-text">{stat.text}</p>
+              </div>
+              {index < stats.length - 1 && (
+                <img
+                  src={import.meta.env.BASE_URL +"/icons/Line -between-numbers.svg"}
+                  alt="separator"
+                  class="separator"
+                />
+              )}
+            </>
+          );
+        })
+      }
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="presence-section">
+    <div class="world-map-container">
+      <img src={import.meta.env.BASE_URL +"/icons/world.svg"} alt="WeCan presence" class="world-map" />
+    </div>
+    <div class="presence-content">
+      <p class="presence-caption">{globalCoverageContent.header}</p>
+      <h4>
+        {globalCoverageContent.text}
+      </h4>
+    </div>
+  </div>
+</section>
+
+<style>
+  .client-logos-wrapper {
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: white;
+    padding: 3rem 0;
+    overflow-x: hidden;
+  }
+
+  .client-logos-scroller {
+    display: flex;
+    align-items: center;
+    gap: 42px; 
+    width: max-content;
+    animation: scroll-left 50s linear infinite;
+  }
+
+  .client-logos-wrapper:hover .client-logos-scroller {
+    animation-play-state: paused;
+  }
+
+  .client-logo-item {
+    width: 120px; 
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 0px; 
+    box-sizing: border-box;
+  }
+
+  .client-logo-img {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    opacity: 0.5;
+    transition: all 0.3s ease;
+  }
+
+  .client-logos-wrapper:hover .client-logo-img {
+    filter: grayscale(0%);
+  }
+
+  .client-logos-scroller .logo-zain,
+  .client-logos-scroller .logo-oodi,
+  .client-logos-scroller .logo-swapp {
+    max-height: 107%;
+  }
+
+  .client-logos-scroller .logo-innovationcity,
+  .client-logos-scroller .logo-zain,
+  .client-logos-scroller .logo-teva {
+    max-height: 95px;
+  }
+
+  .client-logos-scroller .logo-lufthansa,
+  .client-logos-scroller .logo-mckinsey {
+    max-height: 35%;
+  }
+
+  .client-logos-scroller .logo-kpmg,
+  .client-logos-scroller .logo-awt,
+  .client-logos-scroller .logo-osn {
+    max-height: 30%;
+  }
+
+  @keyframes scroll-left {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-33.33%);
+    }
+  }
+  
+  .about-section {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .about-section::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    width: 329px;
+    height: 679px;
+    z-index: 0;
+    opacity: 0.8;
+    background-image: url("website/icons/about-us-background.svg");
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+
+  .about-desc {
+    display: block;
+    color: var(--color-1);
+    font-family: var(--font-family-base);
+    font-size: var(--h3-size);
+    font-weight: 400;
+    line-height: 140%;
+    margin-top: 32px;
+  }
+
+  .container {
+    position: relative;
+    z-index: 1;
+  }
+
+  .list-title {
+    display: block;
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    line-height: 1.4;
+  }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 0.5fr 1fr;
+    gap: 220px;
+    margin-bottom: 6rem;
+    align-items: flex-start;
+  }
+  
+  .content-column ul.value-prop-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 140px;
+    margin-bottom: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+  }
+  
+  .content-column li.value-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.5rem;
+    padding-left: 0;
+    margin-bottom: 0;
+  }
+  
+  .icon-wrapper {
+    width: 50px;
+    flex-shrink: 0;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+  }
+  
+  .value-icon {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  .text-content {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .value-text {
+    font-weight: 400;
+    color: var(--color-text-primary);
+    line-height: 1.6;
+  }
+
+  .stats-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 80px 96px;
+    border-radius: 24px;
+    margin-top: 6rem;
+    width: 100%;
+    box-sizing: border-box;
+    position: relative;
+    z-index: 2;
+    overflow: hidden;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    background: linear-gradient(
+      284deg,
+      rgba(246, 247, 255, 0.5) 62.78%,
+      rgba(223, 238, 246, 0.5) 100.99%
+    );
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.05);
+  }
+  
+  .stats-bg-decoration {
+    position: absolute;
+    width: 404px;
+    height: 404px;
+    transform: rotate(157deg);
+    right: -160px;
+    top: 90px;
+    pointer-events: none;
+    z-index: 0;
+  }
+  
+  .stat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: center;
+    max-width: 290px;
+    width: 100%;
+    position: relative;
+    z-index: 1;
+  }
+
+  .stat-number {
+    font-size: 120px;
+    font-weight: 500;
+    line-height: 100%;
+    margin-bottom: 24px;
+    background: linear-gradient(106deg, #192ec5 5.31%, #208ebd 91.35%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline-block;
+  }
+  
+  .stat-text {
+    color: var(--color-text-secondary);
+    font-family: var(--font-family-base);
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 140%;
+    display: flex;
+    align-items: center;
+    text-align: left;
+    gap: 16px;
+  }
+  
+  .stat-text::before {
+    content: "";
+    display: block;
+    width: 2px;
+    height: 22px;
+    background-color: #20bbbd;
+    flex-shrink: 0;
+    border-radius: 1px;
+  }
+  
+  .separator {
+    height: 80px;
+    margin-top: 10px;
+    opacity: 0.5;
+    position: relative;
+    z-index: 1;
+  }
+
+  .presence-section {
+    margin-top: -240px;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    align-items: center;
+    gap: 0;
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: var(--container-padding-x, 120px);
+    padding-right: var(--container-padding-x, 120px);
+    position: relative;
+    box-sizing: border-box;
+    z-index: 1;
+  }
+  
+  .world-map-container {
+    grid-column: 1 / 9;
+    grid-row: 1;
+    display: flex;
+    justify-content: flex-start;
+  }
+  
+  .world-map {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+  }
+  
+  .presence-content {
+    grid-column: 10 / 13;
+    grid-row: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    margin-top: 40px;
+  }
+  
+  .presence-caption {
+    color: var(--color-accent-teal-light);
+    font-size: var(--h4-size);
+    font-weight: 400;
+    line-height: 130%;
+    letter-spacing: 7.2px;
+    text-transform: uppercase;
+  }
+  
+  .presence-section h4 {
+    color: #101f85;
+    font-size: var(--h3-size);
+    line-height: 170%;
+    font-weight: 400;
+  }
+  
+  .presence-section h4 .highlight {
+    color: #101f85;
+    font-size: 32px;
+    font-weight: 400;
+    line-height: 140%;
+  }
+
+  @media (max-width: 1024px) {
+    .presence-section {
+      grid-template-columns: 1fr;
+      margin-top: 2rem;
+      gap: 2rem;
+      padding-left: var(--container-padding-x);
+      padding-right: var(--container-padding-x);
+    }
+    .world-map-container {
+      grid-column: 1 / -1;
+      grid-row: auto;
+      justify-content: center;
+    }
+    .presence-content {
+      grid-column: 1 / -1;
+      margin-top: 0;
+      padding: 0 1rem;
+    }
+    .about-grid {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+      margin-bottom: 3rem;
+    }
+
+    .about-desc {
+      font-size: var(--h4-size);
+    }
+
+    .list-title {
+      font-size: var(--h3-size);
+    }
+
+    .content-column ul.value-prop-list {
+      margin-top: 2rem;
+    }
+
+    .stats-container {
+      flex-direction: column;
+      padding: 40px 24px;
+      gap: 40px;
+      align-items: stretch;
+      margin-top: 3rem;
+    }
+
+    .stat-number {
+      font-size: 64px; 
+      margin-bottom: 10px;
+    }
+
+    .stat-item {
+      width: 100%;
+      max-width: 400px;
+      margin-left: auto;
+      margin-right: auto;
+
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+.stat-text {
+        text-align: left;
+        width: 100%; 
+    }
+
+    .separator {
+      display: none;
+    }
+
+    .client-logo-item {
+      height: 80px;
+      min-width: 100px;
+    }
+    .client-logo-img {
+      max-height: 40px;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const statsContainer = document.getElementById("stats-counter");
+    if (!statsContainer) return;
+    const animateValue = (element, start, end, duration) => {
+      let startTime = null;
+      const suffix = element.dataset.suffix || "";
+      const step = (timestamp) => {
+        if (!startTime) startTime = timestamp;
+        const progress = Math.min((timestamp - startTime) / duration, 1);
+        const easedProgress = 1 - Math.pow(1 - progress, 3);
+        const currentValue = Math.floor(easedProgress * (end - start) + start);
+        element.textContent = currentValue + suffix;
+        if (progress < 1) {
+          window.requestAnimationFrame(step);
+        }
+      };
+      window.requestAnimationFrame(step);
+    };
+    const observer = new IntersectionObserver(
+      (entries, observer) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const numberElements =
+              entry.target.querySelectorAll(".stat-number");
+            numberElements.forEach((el) => {
+              const targetValue = parseInt(el.dataset.targetValue, 10);
+              if (!isNaN(targetValue)) {
+                animateValue(el, 0, targetValue, 2000);
+              }
+            });
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.5 }
+    );
+    observer.observe(statsContainer);
+  });
+</script>
