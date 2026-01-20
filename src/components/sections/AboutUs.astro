@@ -76,15 +76,17 @@ import SectionHeader from "../global/SectionHeader.astro";
                 >
                   0{suffix}
                 </span>
-                <p class="stat-text">{stat.text}</p>
+               <div class="stat-text-wrapper">
+                 <p class="stat-text">{stat.text}</p>
               </div>
-              {index < stats.length - 1 && (
-                <img
-                  src={import.meta.env.BASE_URL +"/icons/Line -between-numbers.svg"}
-                  alt="separator"
-                  class="separator"
-                />
-              )}
+              </div>
+              {/* {index < stats.length - 1 && (
+                // <img
+                //   src={import.meta.env.BASE_URL +"/icons/Line -between-numbers.svg"}
+                //   alt="separator"
+                //   class="separator"
+                // />
+              )} */}
             </>
           );
         })
@@ -277,10 +279,12 @@ import SectionHeader from "../global/SectionHeader.astro";
     line-height: 1.6;
   }
 
-  .stats-container {
+  /* .stats-container {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+    gap: 64px;
     align-items: flex-start;
+
     padding: 80px 96px;
     border-radius: 24px;
     margin-top: 6rem;
@@ -298,8 +302,34 @@ import SectionHeader from "../global/SectionHeader.astro";
     );
     border: 1px solid rgba(255, 255, 255, 0.8);
     box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.05);
-  }
+  } */
   
+      .stats-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 64px;
+
+    padding: 80px 96px;
+    border-radius: 24px;
+    margin-top: 6rem;
+    width: 100%;
+
+    /* padding: 2.5rem 2rem; */
+    background: linear-gradient(284deg, rgba(246, 247, 255, 0.50) 62.78%, rgba(223, 238, 246, 0.50) 100.99%);
+    box-sizing: border-box;
+    position: relative;
+    z-index: 10;
+
+    border: 1px solid rgba(255, 255, 255, 0.6);
+
+    backdrop-filter: blur(15px); 
+    -webkit-backdrop-filter: blur(15px);
+}
+
+
+
+
   .stats-bg-decoration {
     position: absolute;
     width: 404px;
@@ -315,9 +345,15 @@ import SectionHeader from "../global/SectionHeader.astro";
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    text-align: center;
-    max-width: 290px;
-    width: 100%;
+    text-align: left;
+
+    /* max-width: 290px; */
+    width: 100%; 
+
+    flex: 1; 
+    min-width: 200px;
+
+    /* width: 230px; */
     position: relative;
     z-index: 1;
   }
@@ -332,37 +368,62 @@ import SectionHeader from "../global/SectionHeader.astro";
     background-clip: text;
     -webkit-text-fill-color: transparent;
     display: inline-block;
+    letter-spacing: -2px;
   }
   
   .stat-text {
     color: var(--color-text-secondary);
     font-family: var(--font-family-base);
     font-size: 18px;
-    font-weight: 500;
+    font-weight: 400;
     line-height: 140%;
+    max-width: 280px;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     text-align: left;
     gap: 16px;
   }
-  
-  .stat-text::before {
+
+.stat-text-wrapper {
+    display: flex;
+    /* Két nagyon fontos változás: */
+    align-items: center; /* 1. Ez húzza középre a szöveget függőlegesen */
+    min-height: 54px;    /* 2. Fenntartunk helyet kb. 2 sornak (18px betű * 1.5 sorköz * 2) */
+    gap: 16px;
+  }
+
+
+.stat-text-wrapper::before {
     content: "";
     display: block;
     width: 2px;
-    height: 22px;
+    /* Nem fix magasságot adunk, hanem megnyújtjuk: */
+    align-self: stretch; /* Ez a kulcs: a vonal mindig kitölti a doboz teljes magasságát */
     background-color: #20bbbd;
     flex-shrink: 0;
     border-radius: 1px;
+    opacity: 0.8;
   }
+
+
+  /* .stat-text::before {
+    content: "";
+    display: block;
+     align-self: stretch;
+    width: 2px;
+    height: 48px;
+    background-color: #20bbbd;
+    flex-shrink: 0;
+    border-radius: 1px;
+  } */
   
-  .separator {
+  /* .separator {
     height: 80px;
     margin-top: 10px;
     opacity: 0.5;
     position: relative;
     z-index: 1;
-  }
+  } */
 
   .presence-section {
     margin-top: -240px;
@@ -486,14 +547,10 @@ import SectionHeader from "../global/SectionHeader.astro";
       align-items: flex-start;
     }
 
-.stat-text {
+    .stat-text {
         text-align: left;
         width: 100%; 
-    }
-
-    .separator {
-      display: none;
-    }
+    } 
 
     .client-logo-item {
       height: 80px;
