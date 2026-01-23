@@ -121,7 +121,7 @@ export const servicesData = {
       id: 5,
       title: "Drowning in data?",
       description:
-        "SData engineering, analytics pipelines, and scalable infrastructure to turn data into insights.",
+        "Data engineering, analytics pipelines, and scalable infrastructure to turn data into insights.",
       icon: import.meta.env.BASE_URL + "/icons/services-icon-5.svg",
       link: "",
     },

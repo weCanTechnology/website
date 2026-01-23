@@ -434,10 +434,17 @@ import SectionHeader from "../global/SectionHeader.astro";
   }
 
   @media (max-width: 1024px) {
+    .content-column :global(h1) {
+        white-space: normal !important;
+        width: min-content !important; /* Ez kényszeríti a törést "Value" és "Proposition" között */
+        max-width: 100%;
+        line-height: 1.1;
+    }
     .about-section {
         padding-bottom: 0 !important;
         margin-bottom: -20px;
     }
+
     .presence-section {
       display: flex;
       flex-direction: column;
@@ -487,16 +494,15 @@ import SectionHeader from "../global/SectionHeader.astro";
     }
 
     .stat-number {
-      font-size: 64px; 
+      font-size: 96px; 
       margin-bottom: 10px;
     }
 
     .stat-item {
       width: 100%;
       max-width: 400px;
-      margin-left: auto;
-      margin-right: auto;
-
+      margin-left: 40px;
+      margin-right: 40px;
       display: flex;
       flex-direction: column;
       align-items: flex-start;
@@ -507,10 +513,25 @@ import SectionHeader from "../global/SectionHeader.astro";
         width: 100%; 
     } 
 
+  .value-text {
+    font-size: var(--h4-size)
+  }
+
+    .content-column li.value-item {
+      flex-direction: column; /* Ikon felül, szöveg alatta */
+      align-items: flex-start; /* Balra igazítás */
+      gap: 16px; /* Távolság az ikon és a cím között */
+    }
+
+    .icon-wrapper {
+      margin-bottom: 8px; /* Opcionális extra térköz */
+    }
+
     .client-logo-item {
       height: 80px;
       min-width: 100px;
     }
+
     .client-logo-img {
       max-height: 40px;
     }

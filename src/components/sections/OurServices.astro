@@ -375,6 +375,8 @@ const { title, subtitle, items } = servicesData;
     align-items: flex-start;
     width: 100%;
     gap: 20px;
+
+    flex: 1;
   }
 
   .service-card h3 {
@@ -399,6 +401,8 @@ const { title, subtitle, items } = servicesData;
     -webkit-line-clamp: 4;
     -webkit-box-orient: vertical;
     overflow: hidden;
+
+    margin-top: auto;
   }
 
   .service-card.active {
@@ -414,7 +418,7 @@ const { title, subtitle, items } = servicesData;
     pointer-events: auto;
     cursor: pointer;
     filter: blur(2px);
-    transform: translate(calc(-50% - 360px), -50%) scale(0.85);
+    transform: translate(calc(-50% - 345px), -50%) scale(0.85);
   }
 
   .service-card.next {
@@ -423,7 +427,7 @@ const { title, subtitle, items } = servicesData;
     pointer-events: auto;
     cursor: pointer;
     filter: blur(2px);
-    transform: translate(calc(-50% + 360px), -50%) scale(0.85);
+    transform: translate(calc(-50% + 345px), -50%) scale(0.85);
   }
 
   .service-card.hidden {
@@ -447,9 +451,82 @@ const { title, subtitle, items } = servicesData;
     right: 0;
   }
 
+@media (min-width: 1025px) and (max-width: 1450px) {     
+  .content-grid {
+      grid-template-columns: 380px 1fr; 
+      gap: 2rem;
+    }
+
+    .stack-wrapper {
+      transform: translateX(30px); 
+      width: 100%; 
+    }
+    
+  .stack-wrapper::before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 110%;
+      transform: translate(-50%, -50%);       
+      width: 100%; 
+      height: 80%;      
+      background: linear-gradient(135deg, var(--color-8), var(--color-3));
+      filter: blur(80px); 
+      opacity: 0.6;
+      border-radius: 40%; 
+      z-index: -1;
+    }
+
+    .service-card {
+        width: 280px; 
+        height: 420px;
+        padding: 30px; 
+    }
+
+    .service-card h3 {
+        font-size: 40px; 
+        min-height: 80px;
+    }
+
+    .service-card.prev {
+      transform: translate(calc(-50% - 200px), -50%) scale(0.75);
+      opacity: 0.4; 
+    }
+
+    .service-card.next {
+      transform: translate(calc(-50% + 200px), -50%) scale(0.75);
+      opacity: 0.4;
+    }
+  }
 
   /* mobil&tablet */
   @media (max-width: 1024px) {
+  .text-column :global(.section-header .section-title),
+  .text-column :global(h1) {
+        white-space: nowrap !important;
+        width: min-content !important; 
+        max-width: 100%;
+        line-height: 1.1;
+    }
+
+   .stack-wrapper::before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 110%;
+      transform: translate(-50%, -50%);
+      
+      width: 100%;
+      height: 70%;
+      
+      background: linear-gradient(135deg, var(--color-8), var(--color-3));
+      
+      filter: blur(60px); /* Kicsit kisebb blur mobilon */
+      opacity: 0.5;
+      border-radius: 40%;
+      z-index: -1;
+    }
+
     .content-grid {
       grid-template-columns: 1fr;
       gap: 3rem;
@@ -475,8 +552,8 @@ const { title, subtitle, items } = servicesData;
     }
 
     .service-card {
-      width: 280px;
-      height: 420px;
+      width: 345px;
+      height: 480px;
       padding: 30px;
     }
 
@@ -494,13 +571,13 @@ const { title, subtitle, items } = servicesData;
     }
 
     .service-card.prev {
-      transform: translate(calc(-50% - 40px), -50%) scale(0.9);
+      transform: translate(calc(-20% - 180px), -50%) scale(0.9);
       opacity: 0.5;
       filter: blur(1px);
     }
 
     .service-card.next {
-      transform: translate(calc(-50% + 40px), -50%) scale(0.9);
+      transform: translate(calc(-20% + 180px), -50%) scale(0.9);
       opacity: 0.5;
       filter: blur(1px);
     }
