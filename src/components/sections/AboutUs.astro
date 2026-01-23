@@ -44,7 +44,7 @@ import SectionHeader from "../global/SectionHeader.astro";
                 <li class="value-item">
                   <div class="icon-wrapper">
                     <img
-                     src={import.meta.env.BASE_URL + `/icons/about-us-icon-${index + 1}.svg`}}
+                      src={import.meta.env.BASE_URL + `/icons/about-us-icon-${index + 1}.svg`}
                       alt=""
                       class="value-icon"
                     />
@@ -80,13 +80,6 @@ import SectionHeader from "../global/SectionHeader.astro";
                  <p class="stat-text">{stat.text}</p>
               </div>
               </div>
-              {/* {index < stats.length - 1 && (
-                // <img
-                //   src={import.meta.env.BASE_URL +"/icons/Line -between-numbers.svg"}
-                //   alt="separator"
-                //   class="separator"
-                // />
-              )} */}
             </>
           );
         })
@@ -95,7 +88,7 @@ import SectionHeader from "../global/SectionHeader.astro";
   </div>
 </section>
 
-<section>
+<section class="presence-wrapper-section">
   <div class="presence-section">
     <div class="world-map-container">
       <img src={import.meta.env.BASE_URL +"/icons/world.svg"} alt="WeCan presence" class="world-map" />
@@ -110,6 +103,10 @@ import SectionHeader from "../global/SectionHeader.astro";
 </section>
 
 <style>
+  .presence-wrapper-section {
+    padding-top: 0 !important; 
+  }
+
   .client-logos-wrapper {
     width: 100vw;
     position: relative;
@@ -279,32 +276,7 @@ import SectionHeader from "../global/SectionHeader.astro";
     line-height: 1.6;
   }
 
-  /* .stats-container {
-    display: flex;
-    justify-content: center;
-    gap: 64px;
-    align-items: flex-start;
-
-    padding: 80px 96px;
-    border-radius: 24px;
-    margin-top: 6rem;
-    width: 100%;
-    box-sizing: border-box;
-    position: relative;
-    z-index: 2;
-    overflow: hidden;
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    background: linear-gradient(
-      284deg,
-      rgba(246, 247, 255, 0.5) 62.78%,
-      rgba(223, 238, 246, 0.5) 100.99%
-    );
-    border: 1px solid rgba(255, 255, 255, 0.8);
-    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.05);
-  } */
-  
-      .stats-container {
+  .stats-container {
     display: flex;
     justify-content: center;
     align-items: flex-start;
@@ -315,7 +287,6 @@ import SectionHeader from "../global/SectionHeader.astro";
     margin-top: 6rem;
     width: 100%;
 
-    /* padding: 2.5rem 2rem; */
     background: linear-gradient(284deg, rgba(246, 247, 255, 0.50) 62.78%, rgba(223, 238, 246, 0.50) 100.99%);
     box-sizing: border-box;
     position: relative;
@@ -325,10 +296,7 @@ import SectionHeader from "../global/SectionHeader.astro";
 
     backdrop-filter: blur(15px); 
     -webkit-backdrop-filter: blur(15px);
-}
-
-
-
+  }
 
   .stats-bg-decoration {
     position: absolute;
@@ -347,13 +315,11 @@ import SectionHeader from "../global/SectionHeader.astro";
     align-items: flex-start;
     text-align: left;
 
-    /* max-width: 290px; */
     width: 100%; 
 
     flex: 1; 
     min-width: 200px;
 
-    /* width: 230px; */
     position: relative;
     z-index: 1;
   }
@@ -384,52 +350,32 @@ import SectionHeader from "../global/SectionHeader.astro";
     gap: 16px;
   }
 
-.stat-text-wrapper {
+  .stat-text-wrapper {
     display: flex;
-    /* Két nagyon fontos változás: */
-    align-items: center; /* 1. Ez húzza középre a szöveget függőlegesen */
-    min-height: 54px;    /* 2. Fenntartunk helyet kb. 2 sornak (18px betű * 1.5 sorköz * 2) */
+    align-items: center; 
+    min-height: 54px;    
     gap: 16px;
   }
 
-
-.stat-text-wrapper::before {
+  .stat-text-wrapper::before {
     content: "";
     display: block;
     width: 2px;
-    /* Nem fix magasságot adunk, hanem megnyújtjuk: */
-    align-self: stretch; /* Ez a kulcs: a vonal mindig kitölti a doboz teljes magasságát */
+    align-self: stretch; 
     background-color: #20bbbd;
     flex-shrink: 0;
     border-radius: 1px;
     opacity: 0.8;
   }
 
-
-  /* .stat-text::before {
-    content: "";
-    display: block;
-     align-self: stretch;
-    width: 2px;
-    height: 48px;
-    background-color: #20bbbd;
-    flex-shrink: 0;
-    border-radius: 1px;
-  } */
-  
-  /* .separator {
-    height: 80px;
-    margin-top: 10px;
-    opacity: 0.5;
-    position: relative;
-    z-index: 1;
-  } */
-
   .presence-section {
-    margin-top: -240px;
+    margin-top: -20px; 
+    padding-top: 0;
+    
     display: grid;
     grid-template-columns: repeat(12, 1fr);
-    align-items: center;
+    align-items: flex-start;
+    
     gap: 0;
     max-width: 100%;
     margin-left: auto;
@@ -461,7 +407,7 @@ import SectionHeader from "../global/SectionHeader.astro";
     flex-direction: column;
     align-items: flex-start;
     gap: 16px;
-    margin-top: 40px;
+    margin-top: 100px;
   }
   
   .presence-caption {
@@ -488,23 +434,32 @@ import SectionHeader from "../global/SectionHeader.astro";
   }
 
   @media (max-width: 1024px) {
+    .about-section {
+        padding-bottom: 0 !important;
+        margin-bottom: -20px;
+    }
     .presence-section {
-      grid-template-columns: 1fr;
-      margin-top: 2rem;
-      gap: 2rem;
+      display: flex;
+      flex-direction: column;
+      margin-top: 2rem; 
+      padding-top: 0; 
+      gap: 1.5rem;       
       padding-left: var(--container-padding-x);
       padding-right: var(--container-padding-x);
     }
+    
     .world-map-container {
-      grid-column: 1 / -1;
-      grid-row: auto;
-      justify-content: center;
+      order: 1;
+      width: 100%;
+      margin-bottom: 0;
     }
+    
     .presence-content {
-      grid-column: 1 / -1;
-      margin-top: 0;
-      padding: 0 1rem;
+      order: 2;
+      margin-top: 0; 
+      padding: 0 1rem;    
     }
+    
     .about-grid {
       grid-template-columns: 1fr;
       gap: 3rem;
