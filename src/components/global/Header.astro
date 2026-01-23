@@ -206,8 +206,9 @@ const { isHomepage = false } = Astro.props;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      width: 30px;
-      height: 20px;
+      width: 24px;
+      height: 24px;
+      aspect-ratio: 1/1;
       background: none;
       border: none;
       cursor: pointer;
@@ -219,12 +220,12 @@ const { isHomepage = false } = Astro.props;
       display: block;
       width: 100%;
       height: 2px;
-      background-color: white;
+      background-color: var(--color-accent-teal-light);
       transition: all 0.3s ease;
     }
 
     .hamburger-btn.active span:nth-child(1) {
-      transform: translateY(9px) rotate(45deg);
+      transform: translateY(11px) rotate(45deg);
     }
 
     .hamburger-btn.active span:nth-child(2) {
@@ -232,7 +233,7 @@ const { isHomepage = false } = Astro.props;
     }
 
     .hamburger-btn.active span:nth-child(3) {
-      transform: translateY(-9px) rotate(-45deg);
+      transform: translateY(-11px) rotate(-45deg);
     }
 
     .mobile-menu-overlay {
