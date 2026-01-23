@@ -13,6 +13,15 @@ const { title, subtitle, items } = servicesData;
         <div>
           <p class="service-subtitle">{subtitle}</p>
         </div>
+         <div class="slider-pagination">
+            {items.map((_, index) => (
+              <button 
+                class={`dot ${index === 0 ? "active" : ""}`} 
+                data-index={index}
+                aria-label={`Go to card ${index + 1}`}
+              />
+            ))}
+          </div>
       </div>
 
       <div class="visual-column">
@@ -46,7 +55,7 @@ const { title, subtitle, items } = servicesData;
                 </div>
               ))
             }
-          </div>
+          </div>        
         </div>
       </div>
     </div>
@@ -58,6 +67,7 @@ const { title, subtitle, items } = servicesData;
   const prevBtn = document.getElementById("prevBtn");
   const nextBtn = document.getElementById("nextBtn");
   const section = document.querySelector(".services-section");
+  const dots = document.querySelectorAll(".slider-pagination .dot");
 
   if (stack) {
     const cards = Array.from(stack.querySelectorAll(".service-card"));
@@ -65,7 +75,7 @@ const { title, subtitle, items } = servicesData;
     const totalCards = cards.length;
 
     let autoPlayInterval;
-    const AUTOPLAY_DELAY = 1500;
+    const AUTOPLAY_DELAY = 2000;
     let isPaused = false;
 
     const updateClasses = () => {
@@ -85,6 +95,14 @@ const { title, subtitle, items } = servicesData;
           card.classList.add("hidden");
         }
       });
+
+      dots.forEach((dot, index) => {
+        if (index === currentIndex) {
+          dot.classList.add("active");
+        } else {
+          dot.classList.remove("active");
+        }
+      });
     };
 
     const goToNext = (isManual = false) => {
@@ -98,6 +116,16 @@ const { title, subtitle, items } = servicesData;
       updateClasses();
       if (isManual) resetAutoPlay();
     };
+
+    dots.forEach((dot) => {
+      dot.addEventListener("click", () => {
+        // @ts-ignore
+        const index = parseInt(dot.dataset.index);
+        currentIndex = index;
+        updateClasses();
+        resetAutoPlay();
+      });
+    });
 
     const startAutoPlay = () => {
       if (autoPlayInterval) clearInterval(autoPlayInterval);
@@ -163,6 +191,12 @@ const { title, subtitle, items } = servicesData;
         isPaused = false;
       });
     }
+    
+    const dotsContainer = document.querySelector(".slider-pagination");
+    if (dotsContainer) {
+        dotsContainer.addEventListener("mouseenter", () => isPaused = true);
+        dotsContainer.addEventListener("mouseleave", () => isPaused = false);
+    }
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -182,7 +216,6 @@ const { title, subtitle, items } = servicesData;
     updateClasses();
   }
 </script>
-
 <style>
   .container {
     width: 100%;
@@ -206,6 +239,39 @@ const { title, subtitle, items } = servicesData;
     max-width: 500px;
     z-index: 20;
     position: relative;
+  }
+
+ .slider-pagination {
+   display: flex;
+    align-items: center;
+    gap: 16px; 
+    margin-top: 64px; 
+    pointer-events: auto;
+  }
+  .dot {
+    width: 12px;
+    height: 12px;
+    background-color: #BEC4EE; 
+    border-radius: 50%;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); 
+    flex-shrink: 0;
+  }
+
+  .dot.active {
+    width: 16px;
+    height: 16px;
+    background-color: #182EC4; 
+  }
+
+  .dot:hover {
+    background-color: #a0a9df;
+  }
+  
+  .dot.active:hover {
+    background-color: #182EC4;
   }
 
   .service-subtitle {
@@ -381,6 +447,7 @@ const { title, subtitle, items } = servicesData;
     right: 0;
   }
 
+
   /* mobil&tablet */
   @media (max-width: 1024px) {
     .content-grid {
@@ -392,6 +459,10 @@ const { title, subtitle, items } = servicesData;
       max-width: 100%;
       align-items: flex-start;
       text-align: left;
+    }
+
+    .slider-pagination {
+        margin-top: 40px; 
     }
 
     .service-subtitle {
