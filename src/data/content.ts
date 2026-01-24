@@ -355,23 +355,25 @@ export const featuredBlogPosts = allBlogPosts.slice(0, 3);
 // --- FOOTER ---
 export const footerLinks = [
   {
-    href: "/",
+    href: baseUrl + "/#aboutUs",
     text: "About Us",
   },
   {
-    href: "/services",
-    text: "Services",
+    href: baseUrl + "/#services",
+    text: "Our Services",
   },
   // {
   //   href: "/work",
   //   text: "Works",
   // },
+
+  { href: baseUrl + "/#blog", text: "Blog" },
   {
-    href: "/career",
+    href: baseUrl + "/#career",
     text: "Career",
   },
-  { href: "/blog", text: "Blog" },
 ];
+
 
 export const footerServices = [
   {
