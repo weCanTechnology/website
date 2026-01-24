@@ -1,6 +1,8 @@
 ---
 // src/components/global/Footer.astro
 import { footerLinks } from "../../data/content";
+const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, ""); 
+
 ---
 
 <footer>
@@ -137,10 +139,10 @@ import { footerLinks } from "../../data/content";
     <div id="contact" class="top-section">
       <div class="contact-intro">
         <h2>
-          Get in touch <img src={import.meta.env.BASE_URL +"/icons/Group 477.svg"} class="title-arrow" alt="arrow icon" />
+          Get in touch <img src={baseUrl +"/icons/Group 477.svg"} class="title-arrow" alt="arrow icon" />
         </h2>
         <a href="/" class="logo">
-          <img src={import.meta.env.BASE_URL +"/icons/wecan-logo-white.svg"} alt="WeCan Technology Logo" />
+          <img src={baseUrl +"/icons/wecan-logo-white.svg"} alt="WeCan Technology Logo" />
         </a>
         <div class="intro-text">
           <p>
@@ -164,7 +166,7 @@ import { footerLinks } from "../../data/content";
         <div class="form-action">
           <button type="submit" class="send-button">
             <span>SEND</span>
-            <img src={import.meta.env.BASE_URL +"/icons/Group 477.svg"} alt="arrow" />
+            <img src={baseUrl +"/icons/Group 477.svg"} alt="arrow" />
           </button>
         </div>
       </form>
@@ -198,11 +200,11 @@ import { footerLinks } from "../../data/content";
             </li>
             <li class="social-links">
               <a href="https://www.facebook.com/profile.php?id=100088200860646" aria-label="Facebook" target="_blank">
-                <img src={import.meta.env.BASE_URL +"/icons/facebook-icon.svg"} alt="Facebook" />
+                <img src={baseUrl +"/icons/facebook-icon.svg"} alt="Facebook" />
                 <span>Facebook</span>
               </a>
               <a href="https://www.linkedin.com/company/wecan-technology/" aria-label="LinkedIn" target="_blank">
-                <img src={import.meta.env.BASE_URL +"/icons/linkedin-icon.svg"} alt="LinkedIn" />
+                <img src={baseUrl +"/icons/linkedin-icon.svg"} alt="LinkedIn" />
                 <span>LinkedIn</span>
               </a>
             </li>
@@ -218,12 +220,12 @@ import { footerLinks } from "../../data/content";
         <div class="tender-logos">
         <div class="logo1">
           <a href="/tender1" target="_blank" rel="noopener noreferrer">            
-            <img src={import.meta.env.BASE_URL +"/images/szechenyi-2020-logo-bottom.png"} alt="Széchenyi Terv Plusz, Magyarország Kormánya, EU" />
+            <img src={baseUrl +"/images/szechenyi-2020-logo-bottom.png"} alt="Széchenyi Terv Plusz, Magyarország Kormánya, EU" />
           </a>
         </div>
            <div class="logo2">
           <a href="/tender2" target="_blank" rel="noopener noreferrer">            
-            <img src={import.meta.env.BASE_URL +"/images/eu-logos-combined.png"} alt="Széchenyi Terv Plusz, Magyarország Kormánya, EU" />
+            <img src={baseUrl +"/images/eu-logos-combined.png"} alt="Széchenyi Terv Plusz, Magyarország Kormánya, EU" />
           </a>
           </div>
         </div>

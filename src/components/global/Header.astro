@@ -7,13 +7,15 @@ export interface Props {
   isHomepage?: boolean;
 }
 const { isHomepage = false } = Astro.props;
+const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, ""); 
+
 ---
 
 <header id="main-header" class:list={{ "is-homepage": isHomepage }}>
   <div class="container">
     <a href="/" class="logo">
       <img
-        src={import.meta.env.BASE_URL + "/icons/wecan-logo-white.svg"}
+        src={baseUrl + "/icons/wecan-logo-white.svg"}
         alt="WeCan Technology Logo"
       />
     </a>

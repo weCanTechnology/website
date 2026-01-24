@@ -2,12 +2,15 @@
 // src/components/sections/Hero.astro
 import { heroContent, typeWriterTexts } from "../../data/content";
 import "../../styles/global.css";
+
+const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, ""); 
+
 ---
 
 <section class="hero-section">
   <video class="hero-video" autoplay muted loop playsinline>
     <source
-      src={import.meta.env.BASE_URL + "/videos/hero-background.mp4"}
+      src={baseUrl + "/videos/hero-background.mp4"}
       type="video/mp4"
     />
   </video>

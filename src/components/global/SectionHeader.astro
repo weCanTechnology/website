@@ -7,12 +7,14 @@ interface Props {
 }
 
 const { title, linkHref, linkText } = Astro.props;
+const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, ""); 
+
 ---
 
 <div class="section-header">
   <div class="section-title-wrapper">
     <h1 class="section-title">{title}</h1>
-    <img src={import.meta.env.BASE_URL +"/icons/underscore.svg"} alt="underscore" class="title-underscore" />
+    <img src={baseUrl +"/icons/underscore.svg"} alt="underscore" class="title-underscore" />
   </div>
   {linkHref && linkText && (
     <a href={linkHref} class="cta-link">{linkText} →</a>

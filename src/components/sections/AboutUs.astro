@@ -7,6 +7,9 @@ import {
   globalCoverageContent,
 } from "../../data/content";
 import SectionHeader from "../global/SectionHeader.astro";
+
+const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, ""); 
+
 ---
 
 <section class="client-logos-wrapper">
@@ -44,7 +47,7 @@ import SectionHeader from "../global/SectionHeader.astro";
                 <li class="value-item">
                   <div class="icon-wrapper">
                     <img
-                      src={import.meta.env.BASE_URL + `/icons/about-us-icon-${index + 1}.svg`}
+                      src={baseUrl + `/icons/about-us-icon-${index + 1}.svg`}
                       alt=""
                       class="value-icon"
                     />
@@ -91,7 +94,7 @@ import SectionHeader from "../global/SectionHeader.astro";
 <section class="presence-wrapper-section">
   <div class="presence-section">
     <div class="world-map-container">
-      <img src={import.meta.env.BASE_URL +"/icons/world.svg"} alt="WeCan presence" class="world-map" />
+      <img src={baseUrl +"/icons/world.svg"} alt="WeCan presence" class="world-map" />
     </div>
     <div class="presence-content">
       <p class="presence-caption">{globalCoverageContent.header}</p>

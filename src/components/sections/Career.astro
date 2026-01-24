@@ -9,6 +9,9 @@ const whatWeOffer = [
   "Receive a competitive salary and benefits package that recognizes your expertise.",
   "Enjoy the possibility of full remote work.",
 ];
+
+const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, ""); 
+
 ---
 
 <section id="career" class="open-positions-section">
@@ -37,15 +40,12 @@ const whatWeOffer = [
             >
               <span class="arrow-icon">
                 <img
-                  src={import.meta.env.BASE_URL + "/icons/arrow-learn-more.svg"}
+                  src={baseUrl + "/icons/arrow-learn-more.svg"}
                   alt=""
                   class="arrow-default"
                 />
                 <img
-                  src={
-                    import.meta.env.BASE_URL +
-                    "/icons/arrow-learn-more-hover.svg"
-                  }
+                  src={baseUrl + "/icons/arrow-learn-more-hover.svg"}
                   alt=""
                   class="arrow-hover"
                 />
