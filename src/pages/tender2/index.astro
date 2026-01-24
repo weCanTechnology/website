@@ -3,7 +3,6 @@
 import MainLayout from "../../layouts/MainLayout.astro";
 import SectionHeader from "../../components/global/SectionHeader.astro";
 
-// Adatok strukturálása a könnyebb kezelhetőségért
 const projectData = {
   beneficiary: "weCan Technology Zrt.",
   title: "Digitális termék-innovációs fejlesztés",
@@ -86,27 +85,25 @@ const projectData = {
 </MainLayout>
 
 <style>
-  /* --- Section alapok (AboutUs mintájára) --- */
   .tender-section {
     position: relative;
     padding-bottom: 6rem;
     overflow: hidden;
   }
 
-  /* Háttér dekoráció */
   .tender-section::before {
     content: "";
     position: absolute;
     top: 0;
-    right: 0; /* Jobb oldalra tettem a változatosság kedvéért, de lehet left is */
+    right: 0; 
     width: 329px;
     height: 679px;
     z-index: 0;
     opacity: 0.6;
-    background-image: url("website/icons/about-us-background.svg");
+    background-image: url("icons/about-us-background.svg");
     background-repeat: no-repeat;
     background-size: contain;
-    transform: scaleX(-1); /* Tükrözés, hogy passzoljon a jobb oldalra */
+    transform: scaleX(-1); 
   }
 
   .container {
@@ -118,16 +115,13 @@ const projectData = {
     margin-bottom: 4rem;
   }
 
-  /* --- Grid Layout --- */
   .tender-grid {
     display: grid;
-    /* Bal oszlop (adatok) keskenyebb, Jobb oszlop (szöveg) szélesebb */
     grid-template-columns: 350px 1fr; 
     gap: 4rem;
     align-items: flex-start;
   }
 
-  /* --- Kártya Stílus (Bal oszlop) --- */
   .project-card {
     background: linear-gradient(284deg, rgba(246, 247, 255, 0.9) 62.78%, rgba(223, 238, 246, 0.9) 100.99%);
     backdrop-filter: blur(15px);
@@ -136,7 +130,7 @@ const projectData = {
     box-shadow: 0 10px 30px rgba(0,0,0,0.05);
     border: 1px solid rgba(255, 255, 255, 0.5);
     position: sticky;
-    top: 140px; /* Hogy görgetéskor ott maradjon */
+    top: 140px; 
   }
 
   .card-header h3 {
@@ -150,7 +144,7 @@ const projectData = {
   .card-line {
     width: 60px;
     height: 4px;
-    background-color: #20BBBD; /* WeCan Teal */
+    background-color: #20BBBD; 
     border-radius: 2px;
     margin-bottom: 2rem;
   }
@@ -217,15 +211,14 @@ const projectData = {
     font-weight: 500;
   }
 
-  /* --- Reszponzivitás --- */
   @media (max-width: 1024px) {
     .tender-grid {
-      grid-template-columns: 1fr; /* Egymás alá kerülnek */
+      grid-template-columns: 1fr; 
       gap: 3rem;
     }
 
     .project-card {
-      position: static; /* Mobilon ne ragadjon */
+      position: static; 
       max-width: 100%;
     }
 
