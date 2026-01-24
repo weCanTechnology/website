@@ -15,9 +15,11 @@ const { title, isHomepage = false } = Astro.props;
 <html lang="hu">
   <head>
     <meta charset="UTF-8" />
-    <meta name="description" content="WeCan Technology" />
+    <meta name="description" content="weCan Technology – Digitizing with Cloud 1st approach" />
     <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="64x64" href="/website/images/favicon-64.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/website/images/favicon-32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/website/images/favicon-16.png">
     <title>{title}</title>    
   </head>
   <body class:list={{ "is-homepage-body": isHomepage }}>
