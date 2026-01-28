@@ -1,6 +1,6 @@
 ---
 // src/components/global/Footer.astro
-import { footerLinks } from "../../data/content";
+import { footerLinks, footerContent } from "../../data/content";
 const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, ""); 
 
 ---
@@ -139,14 +139,14 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
     <div id="contact" class="top-section">
       <div class="contact-intro">
         <h2>
-          Get in touch <img src={baseUrl +"/icons/Group 477.svg"} class="title-arrow" alt="arrow icon" />
+          {footerContent.contactIntro.title} <img src={baseUrl +"/icons/Group 477.svg"} class="title-arrow" alt="arrow icon" />
         </h2>
         <a href="/" class="logo">
           <img src={baseUrl +"/icons/wecan-logo-white.svg"} alt="WeCan Technology Logo" />
         </a>
         <div class="intro-text">
           <p>
-            At weCan, we engineer excellence with our strong focus on critical applications and by providing full support on our clients’ digital transformation journey.
+            {footerContent.contactIntro.text}
           </p>
         </div>
       </div>
@@ -154,18 +154,18 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
       <form class="contact-form" action="https://formspree.io/f/xqaywpab" method="POST">
         <div class="form-row">
           <div class="form-group">
-            <input type="text" id="name" name="name" placeholder="Your name*" required />
+            <input type="text" id="name" name="name" placeholder={footerContent.contactIntro.form.namePlaceholder} required />
           </div>
           <div class="form-group">
-            <input type="email" id="email" name="email" placeholder="Your e-mail address*" required />
+            <input type="email" id="email" name="email" placeholder={footerContent.contactIntro.form.emailPlaceholder} required />
           </div>
         </div>
         <div class="form-group message-group">
-          <textarea id="message" name="message" rows="1" placeholder="Your message*" required></textarea>
+          <textarea id="message" name="message" rows="1" placeholder={footerContent.contactIntro.form.messagePlaceholder} required></textarea>
         </div>
         <div class="form-action">
           <button type="submit" class="send-button">
-            <span>SEND</span>
+            <span>{footerContent.contactIntro.form.submitBtn}</span>
             <img src={baseUrl +"/icons/Group 477.svg"} alt="arrow" />
           </button>
         </div>
@@ -177,7 +177,7 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
     <div class="bottom-section">
       <div class="links-wrapper">
         <div class="footer-col links">
-          <h4>LINKS</h4>
+          <h4>{footerContent.columns.linksTitle}</h4>
           <ul>
             {
               footerLinks.map((link) => (
@@ -190,22 +190,22 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
         </div>
 
         <div class="footer-col contact">
-          <h4>CONTACT US</h4>
+          <h4>{footerContent.columns.contactTitle}</h4>
           <ul>
             <li>
-              <a href="mailto:hello@wecanconsulting.eu">hello@wecanconsulting.eu</a>
+              <a href={`mailto:${footerContent.emails.hello}`}>{footerContent.emails.hello}</a>
             </li>
             <li>
-              <a href="mailto:recruitment@wecanconsulting.eu">recruitment@wecanconsulting.eu</a>
+              <a href={`mailto:${footerContent.emails.recruitment}`}>{footerContent.emails.recruitment}</a>
             </li>
             <li class="social-links">
-              <a href="https://www.facebook.com/profile.php?id=100088200860646" aria-label="Facebook" target="_blank">
-                <img src={baseUrl +"/icons/facebook-icon.svg"} alt="Facebook" />
-                <span>Facebook</span>
+              <a href={footerContent.social.facebook.url} aria-label={footerContent.social.facebook.label} target="_blank">
+                <img src={baseUrl +"/icons/facebook-icon.svg"} alt={footerContent.social.facebook.label} />
+                <span>{footerContent.social.facebook.label}</span>
               </a>
-              <a href="https://www.linkedin.com/company/wecan-technology/" aria-label="LinkedIn" target="_blank">
-                <img src={baseUrl +"/icons/linkedin-icon.svg"} alt="LinkedIn" />
-                <span>LinkedIn</span>
+              <a href={footerContent.social.linkedin.url} aria-label={footerContent.social.linkedin.label} target="_blank">
+                <img src={baseUrl +"/icons/linkedin-icon.svg"} alt={footerContent.social.linkedin.label} />
+                <span>{footerContent.social.linkedin.label}</span>
               </a>
             </li>
           </ul>
@@ -213,10 +213,7 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
       </div>
 
       <div class="info-wrapper">
-        <p class="copyright-text">
-          © WeCan Technology 2025<br />
-          All rights reserved
-        </p>
+        <p class="copyright-text" set:html={footerContent.copyright} />
         <div class="tender-logos">
         <div class="logo1">
           <a href="/tender1" target="_blank" rel="noopener noreferrer">            

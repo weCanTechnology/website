@@ -2,63 +2,53 @@
 // src/pages/tender/ginop.astro
 import MainLayout from "../../layouts/MainLayout.astro";
 import SectionHeader from "../../components/global/SectionHeader.astro";
+import { tender1Content } from "../../data/content-tender1";
 
-// Adatok strukturálása
-const projectData = {
-  programName:
-    "Mikro-, kis- és középvállalkozások Technológiai korszerűsítése célú Hitelprogram",
-  code: "GINOP-8.3.5-18 ’B’ hitelcél",
-  amount: "120 424 500 Ft",
-  contractNumber: "H-EKTG2/111663/2023/462265/001",
-  awardDate: "2023.07.24",
-  maturityDate: "2028.07.15.",
-  location: "4032 Debrecen, Böszörményi út 68.",
-  email: "office@wecanconsulting.eu",
-};
+const { projectData, meta, sectionHeader, card, content } = tender1Content;
 ---
 
-<MainLayout title="Pályázatok - GINOP - WeCan Technology">
+<MainLayout title={meta.title}>
   <section class="tender-section">
     <div class="container">
       <div class="page-header">
-        <SectionHeader title="Pályázatok" />
+        <SectionHeader title={sectionHeader.title} />
       </div>
 
       <div class="tender-grid">
         <aside class="info-column">
           <div class="project-card">
             <div class="card-header">
-              <h3>Projekt Adatok</h3>
+              <h3>{card.title}</h3>
               <div class="card-line"></div>
             </div>
 
             <div class="info-item">
-              <span class="label">Szerződés száma:</span>
+              <span class="label">{card.labels.contractNumber}</span>
               <span class="value small-text">{projectData.contractNumber}</span>
             </div>
 
             <div class="info-item">
-              <span class="label">Elnyert hitel összege:</span>
+              <span class="label">{card.labels.amount}</span>
               <span class="value highlight">{projectData.amount}</span>
             </div>
 
             <div class="info-item">
-              <span class="label">Odaítélés dátuma:</span>
+              <span class="label">{card.labels.awardDate}</span>
               <span class="value">{projectData.awardDate}</span>
             </div>
 
             <div class="info-item">
-              <span class="label">Visszafizetés határideje:</span>
+              <span class="label">{card.labels.maturityDate}</span>
               <span class="value">{projectData.maturityDate}</span>
             </div>
 
             <div class="info-item">
-              <span class="label">Megvalósítás helyszíne:</span>
+              <span class="label">{card.labels.location}</span>
               <span class="value">{projectData.location}</span>
             </div>
 
             <div class="info-item contact-item">
-              <span class="label">További információ:</span>
+              <span class="label">{card.labels.moreInfo}</span>
               <a href={`mailto:${projectData.email}`} class="value link"
                 >{projectData.email}</a
               >
@@ -71,27 +61,13 @@ const projectData = {
           <h2 class="project-title">{projectData.programName}</h2>
 
           <div class="text-body">
-            <p>
-              A <strong>weCAN TECHNOLOGY Zrt.</strong> sikeresen pályázott a Mikro-,
-              kis- és középvállalkozások Technológiai korszerűsítése célú Hitelprogramban,
-              melynek keretében 120,42 millió forint összegű, kamatmentes, forgóeszköz
-              finanszírozásra felhasználható kölcsönt vehet igénybe.
-            </p>
+            <p set:html={content.intro} />
 
-            <h3>A finanszírozás célja</h3>
-            <p>
-              A hitelt a weCAN TECHNOLOGY Zrt. a debreceni fióktelepének további
-              fejlesztésére, elsődlegesen a jelenlegi humán erőforrás állomány
-              bérköltségére, illetve további bővítésére fordítja.
-            </p>
+            <h3>{content.purposeTitle}</h3>
+            <p>{content.purposeText}</p>
 
             <div class="highlight-box">
-              <p>
-                Célunk, hogy a régióból nagy tudású, nemzetközi tapasztalattal
-                rendelkező kollégák, valamint szükség estén alvállalkozók
-                bevonásával a debreceni fióktelepünk önállóan is alkalmassá
-                váljon nemzetközi projektek végrehajtására.
-              </p>
+              <p>{content.highlightBox}</p>
             </div>
           </div>
         </div>

@@ -1,24 +1,15 @@
 ---
-import { jobPositions } from "../../data/content";
+import { jobPositions, careerContent } from "../../data/content";
 import SectionHeader from "../global/SectionHeader.astro";
 
-const whatWeOffer = [
-  "Work with cutting-edge technologies in a dynamic, fast-moving environment.",
-  "Join a supportive, fun, and innovative team where creativity and collaboration thrive.",
-  "Enjoy professional development opportunities, including mentorship and leadership growth.",
-  "Receive a competitive salary and benefits package that recognizes your expertise.",
-  "Enjoy the possibility of full remote work.",
-];
-
 const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, ""); 
-
 ---
 
 <section id="career" class="open-positions-section">
   <div class="container">
-    <SectionHeader title="Career" />
+    <SectionHeader title={careerContent.title} />
 
-    <h2>Open Positions:</h2>
+    <h2>{careerContent.subtitle}</h2>
     <div class="positions-list">
       {
         jobPositions.map((job) => (
@@ -50,7 +41,7 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
                   class="arrow-hover"
                 />
               </span>
-              <span>Apply</span>
+              <span>{careerContent.applyText}</span>
             </a>
           </article>
         ))

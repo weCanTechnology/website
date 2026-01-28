@@ -1,6 +1,7 @@
 ---
 // src/components/sections/Blog.astro
 import type { BlogPost } from "../../types";
+import { blogSectionContent } from "../../data/content";
 import SectionHeader from "../global/SectionHeader.astro";
 
 export interface Props {
@@ -15,9 +16,9 @@ const { blogPosts, isPage = false, gridColumns = 3 } = Astro.props;
 <section id="blog" class="blog-section">
   <div class="container">
     <SectionHeader
-      title="Blog"
-      linkHref="https://www.linkedin.com/company/wecan-technology/posts/"
-      linkText="View all blog posts" 
+      title={blogSectionContent.title}
+      linkHref={blogSectionContent.linkHref}
+      linkText={blogSectionContent.linkText} 
     />
 
     <div class="blog-grid">

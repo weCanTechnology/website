@@ -2,22 +2,17 @@
 // src/pages/tender/index.astro
 import MainLayout from "../../layouts/MainLayout.astro";
 import SectionHeader from "../../components/global/SectionHeader.astro";
+import { tender2Content } from "../../data/content-tender2";
 
-const projectData = {
-  beneficiary: "weCan Technology Zrt.",
-  title: "Digitális termék-innovációs fejlesztés",
-  amount: "34 484 831 Ft",
-  deadline: "2026.12.31.",
-  goal: "Whitelabel Selfcare mobil applikáció létrehozása",
-};
+const { projectData, meta, sectionHeader, card, content } = tender2Content;
 ---
 
-<MainLayout title="Pályázatok - WeCan Technology">
+<MainLayout title={meta.title}>
   <section class="tender-section">
     <div class="container">
       
       <div class="page-header">
-        <SectionHeader title="Pályázatok" />
+        <SectionHeader title={sectionHeader.title} />
       </div>
 
       <div class="tender-grid">
@@ -25,27 +20,27 @@ const projectData = {
         <aside class="info-column">
           <div class="project-card">
             <div class="card-header">
-              <h3>Projekt Adatok</h3>
+              <h3>{card.title}</h3>
               <div class="card-line"></div>
             </div>
             
             <div class="info-item">
-              <span class="label">Kedvezményezett neve:</span>
+              <span class="label">{card.labels.beneficiary}</span>
               <span class="value">{projectData.beneficiary}</span>
             </div>
 
             <div class="info-item">
-              <span class="label">Támogatás összege:</span>
+              <span class="label">{card.labels.amount}</span>
               <span class="value highlight">{projectData.amount}</span>
             </div>
 
             <div class="info-item">
-              <span class="label">Befejezési dátum:</span>
+              <span class="label">{card.labels.deadline}</span>
               <span class="value">{projectData.deadline}</span>
             </div>
 
             <div class="info-item">
-              <span class="label">Fejlesztés tárgya:</span>
+              <span class="label">{card.labels.title}</span>
               <span class="value">{projectData.title}</span>
             </div>
           </div>
@@ -55,27 +50,17 @@ const projectData = {
           <h2 class="project-title">{projectData.goal}</h2>
           
           <div class="text-body">
-            <p>
-              A fejlesztendő mobil applikáció különböző iparágak – például távközlési szolgáltatók, webáruházak, sportklubok, stb. – számára biztosít egy könnyen testreszabható, fejlett digitális ügyfélkapcsolati platformot. Az applikáció központi eleme, hogy moduláris és skálázható, így a vállalkozások egyedi igényeikre szabhatják az alkalmazás funkcionalitását és megjelenését, anélkül, hogy teljesen új fejlesztést kellene végezniük.
-            </p>
+            <p>{content.intro}</p>
             
-            <p>
-              A fejlesztés révén egy rugalmas, költséghatékony és gyorsan piacra vihető megoldás jön létre, amely jelentős versenyelőnyt biztosít a felhasználó vállalkozások számára, mivel időt és fejlesztési költségeket takarít meg számukra. Az applikáció egy előre konfigurált, gyorsan bevezethető selfcare rendszer, amely a piacra lépést támogató testreszabható interfészekkel és üzleti logikákkal rendelkezik.
-            </p>
+            <p>{content.description}</p>
 
             <div class="highlight-box">
-              <p>
-                A whitelabel selfcare applikáció nagy piaci potenciállal bír, mivel az önkiszolgáló ügyfélkezelési megoldások iránti kereslet folyamatosan növekszik, különösen olyan iparágakban, ahol az ügyfélkapcsolatok és tranzakciók nagy volumenben zajlanak.
-              </p>
+              <p>{content.highlightBox}</p>
             </div>
 
-            <p>
-              A megoldás révén az ügyfelek azonnal bevezethetik saját brandelt ügyfélkapcsolati alkalmazásukat, miközben a háttérben a fejlett digitális technológiák biztosítják a stabil és megbízható működést.
-            </p>
+            <p>{content.closing1}</p>
 
-            <p>
-              Az applikáció mobilkészüléken (iOS és Android), valamint webes felületen egyaránt elérhető lesz, így a felhasználók bárhonnan, bármikor kényelmesen hozzáférhetnek az önkiszolgáló ügyfélkapcsolati funkciókhoz. A rendszer reszponzív és platformfüggetlen kialakításának köszönhetően a vállalatoknak nem kell külön alkalmazásokat fejleszteniük vagy telepítési korlátokkal számolniuk.
-            </p>
+            <p>{content.closing2}</p>
           </div>
         </div>
 
