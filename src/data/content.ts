@@ -12,6 +12,11 @@ import type {
 
 const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
 
+// --- GLOBAL ---
+export const globalContent = {
+  contactLinkText: "Contact Us",
+};
+
 // --- HEADER ---
 export const navLinks: NavLink[] = [
   {
@@ -242,7 +247,6 @@ export const allWorkItems: WorkItem[] = [
   },
 ];
 
-// Ez a szűkített lista a főoldalra
 export const featuredWorkItems = allWorkItems.slice(0, 3);
 
 export const clients: Client[] = [
@@ -305,19 +309,31 @@ export const clients: Client[] = [
 ];
 
 // --- BLOG ---
+export const blogSectionContent = {
+  title: "Blog",
+  linkText: "View all blog posts",
+  linkHref: "https://www.linkedin.com/company/wecan-technology/posts/",
+};
+
 export const allBlogPosts: BlogPost[] = [
+  {
+    date: "JANUARY 26, 2026",
+    title: "Going the extra mile, literally",
+    image: baseUrl + "/images/blog/blog_16.jpg",
+    link: "https://www.linkedin.com/posts/wecan-technology_going-the-extra-mile-literally-recently-activity-7421516927271100416-KVmx?utm_source=share&utm_medium=member_desktop&rcm=ACoAACX7qXwBqT7LM6V3qUzPRPWD1WDRWNICrZ4",
+  },
   {
     date: "OCTOBER 21, 2025",
     title: "Our autumn team-building retreat in the Mátra",
     image: baseUrl + "/images/blog/blog_14.jpg",
     link: "https://www.linkedin.com/posts/wecan-technology_our-autumn-team-building-retreat-in-the-m%C3%A1tra-activity-7386324890204672002-P3zp?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAB5ttA8B3ClgPbLvv0Pk8d-2iUvUcSrhDWs",
   },
-  {
-    date: "OCTOBER 16, 2025",
-    title: "We had an incredible experience at GITEX 2025",
-    image: baseUrl + "/images/blog/blog_13.jpg",
-    link: "https://www.linkedin.com/posts/wecan-technology_we-had-an-incredible-experience-at-gitex-activity-7384483276914077696-LcuB?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAB5ttA8B3ClgPbLvv0Pk8d-2iUvUcSrhDWs",
-  },
+  // {
+  //   date: "OCTOBER 16, 2025",
+  //   title: "We had an incredible experience at GITEX 2025",
+  //   image: baseUrl + "/images/blog/blog_13.jpg",
+  //   link: "https://www.linkedin.com/posts/wecan-technology_we-had-an-incredible-experience-at-gitex-activity-7384483276914077696-LcuB?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAB5ttA8B3ClgPbLvv0Pk8d-2iUvUcSrhDWs",
+  // },
   {
     date: "OCTOBER 09, 2025",
     title: "At WeCan, adaptability is at the heart of everything we do",
@@ -352,6 +368,20 @@ export const allBlogPosts: BlogPost[] = [
 
 export const featuredBlogPosts = allBlogPosts.slice(0, 3);
 
+// --- CAREER ---
+export const careerContent = {
+  title: "Career",
+  subtitle: "Open Positions:",
+  applyText: "Apply",
+  whatWeOffer: [
+    "Work with cutting-edge technologies in a dynamic, fast-moving environment.",
+    "Join a supportive, fun, and innovative team where creativity and collaboration thrive.",
+    "Enjoy professional development opportunities, including mentorship and leadership growth.",
+    "Receive a competitive salary and benefits package that recognizes your expertise.",
+    "Enjoy the possibility of full remote work.",
+  ],
+};
+
 // --- FOOTER ---
 export const footerLinks = [
   {
@@ -374,6 +404,37 @@ export const footerLinks = [
   },
 ];
 
+export const footerContent = {
+  contactIntro: {
+    title: "Get in touch",
+    text: "At weCan, we engineer excellence with our strong focus on critical applications and by providing full support on our clients’ digital transformation journey.",
+    form: {
+      namePlaceholder: "Your name*",
+      emailPlaceholder: "Your e-mail address*",
+      messagePlaceholder: "Your message*",
+      submitBtn: "SEND",
+    },
+  },
+  columns: {
+    linksTitle: "LINKS",
+    contactTitle: "CONTACT US",
+  },
+  copyright: "© WeCan Technology 2025<br />All rights reserved",
+  social: {
+    facebook: {
+      label: "Facebook",
+      url: "https://www.facebook.com/profile.php?id=100088200860646",
+    },
+    linkedin: {
+      label: "LinkedIn",
+      url: "https://www.linkedin.com/company/wecan-technology/",
+    },
+  },
+  emails: {
+    hello: "hello@wecanconsulting.eu",
+    recruitment: "recruitment@wecanconsulting.eu",
+  },
+};
 
 export const footerServices = [
   {
@@ -480,3 +541,5 @@ export const jobPositions: JobPosition[] = [
   //   applyLink: "#",
   // },
 ];
+
+

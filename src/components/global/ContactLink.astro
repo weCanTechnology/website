@@ -1,5 +1,6 @@
 ---
 // src/components/global/ContactLink.astro
+import { globalContent } from "../../data/content";
 
 export interface Props {
   href?: string;
@@ -13,7 +14,7 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
     <img src={baseUrl +"/icons/arrow-contact.svg"} alt="" class="arrow-default" />
     <img src={baseUrl +"/icons/arrow-contact-hover.svg"} alt="" class="arrow-hover" />
   </span>
-  <span>Contact Us</span>
+  <span>{globalContent.contactLinkText}</span>
 </a>
 
 <style>
