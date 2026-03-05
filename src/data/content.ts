@@ -406,33 +406,33 @@ export const footerLinks = [
 
 export const footerContent = {
   contactIntro: {
-    title: "Get in touch",
-    text: "At weCan, we engineer excellence with our strong focus on critical applications and by providing full support on our clients’ digital transformation journey.",
+    title: 'Get in touch',
+    text: 'At weCan, we engineer excellence with our strong focus on critical applications and by providing full support on our clients’ digital transformation journey.',
     form: {
-      namePlaceholder: "Your name*",
-      emailPlaceholder: "Your e-mail address*",
-      messagePlaceholder: "Your message*",
-      submitBtn: "SEND",
+      namePlaceholder: 'Your name*',
+      emailPlaceholder: 'Your e-mail address*',
+      messagePlaceholder: 'Your message*',
+      submitBtn: 'SEND',
     },
   },
   columns: {
-    linksTitle: "LINKS",
-    contactTitle: "CONTACT US",
+    linksTitle: 'LINKS',
+    contactTitle: 'CONTACT US',
   },
-  copyright: "© WeCan Technology 2025<br />All rights reserved",
+  copyright: '© WeCan Technology 2025<br />All rights reserved',
   social: {
     facebook: {
-      label: "Facebook",
-      url: "https://www.facebook.com/profile.php?id=100088200860646",
+      label: 'Facebook',
+      url: 'https://www.facebook.com/profile.php?id=100088200860646',
     },
     linkedin: {
-      label: "LinkedIn",
-      url: "https://www.linkedin.com/company/wecan-technology/",
+      label: 'LinkedIn',
+      url: 'https://www.linkedin.com/company/wecan-technology/',
     },
   },
   emails: {
-    hello: "hello@wecanconsulting.eu",
-    recruitment: "recruitment@wecanconsulting.eu",
+    hello: 'hello@wecan.technology',
+    recruitment: 'recruitment@wecan.technology',
   },
 };
 
