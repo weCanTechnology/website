@@ -1,15 +1,15 @@
 ---
 // src/pages/index.astro
 import MainLayout from "../layouts/MainLayout.astro";
-import { featuredBlogPosts } from "../data/content";
+import { featuredBlogPosts, showCareerSection } from "../data/content";
 
 // Szekció komponensek importálása
 import Hero from "../components/sections/Hero.astro";
 import AboutUs from "../components/sections/AboutUs.astro";
 import OurServices from "../components/sections/OurServices.astro";
 import Blog from "../components/sections/Blog.astro";
-import Career from "../components/sections/Career.astro";
 import Contact from "../components/sections/Contact.astro";
+import Career from "../components/sections/Career.astro";
 ---
 
 <MainLayout title="weCan Techology – Digitizing with Cloud 1st approach" isHomepage={true}>
@@ -17,6 +17,6 @@ import Contact from "../components/sections/Contact.astro";
   <OurServices />
   <AboutUs />
   <Contact/>
-  <Blog blogPosts={featuredBlogPosts} />
-  <Career />
+  <Blog blogPosts={featuredBlogPosts} withBottomSpacing={!showCareerSection} />
+  {showCareerSection && <Career />}
 </MainLayout>

@@ -17,6 +17,8 @@ export const globalContent = {
   contactLinkText: "Contact Us",
 };
 
+export const showCareerSection = false;
+
 // --- HEADER ---
 export const navLinks: NavLink[] = [
   {
@@ -35,10 +37,14 @@ export const navLinks: NavLink[] = [
     href: baseUrl + "/#blog",
     text: "Blog",
   },
-  {
-    href: baseUrl + "/#career",
-    text: "Career",
-  },
+  ...(showCareerSection
+    ? [
+        {
+          href: baseUrl + "/#career",
+          text: "Career",
+        },
+      ]
+    : []),
 ];
 
 // --- HERO ---
@@ -331,54 +337,6 @@ export const allBlogPosts: BlogPost[] = [
     image: baseUrl + "/images/blog/1770722829922.jpeg",
     link: "https://www.linkedin.com/posts/wecan-technology_doha-the-next-milestone-in-our-middle-east-activity-7426949859946987520-v5Uj?utm_source=share&utm_medium=member_desktop&rcm=ACoAADbopjEBnF6WpUC85W5cEQe88RDuu_Hx9gI",
   },
-  {
-    date: "JANUARY 26, 2026",
-    title: "Going the extra mile, literally",
-    image: baseUrl + "/images/blog/blog_16.jpg",
-    link: "https://www.linkedin.com/posts/wecan-technology_going-the-extra-mile-literally-recently-activity-7421516927271100416-KVmx?utm_source=share&utm_medium=member_desktop&rcm=ACoAACX7qXwBqT7LM6V3qUzPRPWD1WDRWNICrZ4",
-  },
-  {
-    date: "OCTOBER 21, 2025",
-    title: "Our autumn team-building retreat in the Mátra",
-    image: baseUrl + "/images/blog/blog_14.jpg",
-    link: "https://www.linkedin.com/posts/wecan-technology_our-autumn-team-building-retreat-in-the-m%C3%A1tra-activity-7386324890204672002-P3zp?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAB5ttA8B3ClgPbLvv0Pk8d-2iUvUcSrhDWs",
-  },
-  // {
-  //   date: "OCTOBER 16, 2025",
-  //   title: "We had an incredible experience at GITEX 2025",
-  //   image: baseUrl + "/images/blog/blog_13.jpg",
-  //   link: "https://www.linkedin.com/posts/wecan-technology_we-had-an-incredible-experience-at-gitex-activity-7384483276914077696-LcuB?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAB5ttA8B3ClgPbLvv0Pk8d-2iUvUcSrhDWs",
-  // },
-  {
-    date: "OCTOBER 09, 2025",
-    title: "At WeCan, adaptability is at the heart of everything we do",
-    image: baseUrl + "/images/blog/blog_12.jpg",
-    link: "https://www.linkedin.com/posts/wecan-technology_at-wecan-adaptability-is-at-the-heart-of-activity-7381950311818768384-tDLN?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAB5ttA8B3ClgPbLvv0Pk8d-2iUvUcSrhDWs",
-  },
-  {
-    date: "OCTOBER 07, 2025",
-    title: "Octber is a great time to embrace growth",
-    image: baseUrl + "/images/blog/blog_11.jpg",
-    link: "https://www.linkedin.com/posts/wecan-technology_october-is-a-great-time-to-embrace-growth-activity-7379416267142873088-61Je?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAB5ttA8B3ClgPbLvv0Pk8d-2iUvUcSrhDWs",
-  },
-  {
-    date: "SEPTEMBER 30, 2025",
-    title: "We traded screens for bikes and hit the road",
-    image: baseUrl + "/images/blog/blog_10.jpg",
-    link: "https://www.linkedin.com/posts/wecan-technology_we-traded-screens-for-bikes-and-hit-the-activity-7376876869297745920-D-jM?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAB5ttA8B3ClgPbLvv0Pk8d-2iUvUcSrhDWs",
-  },
-  {
-    date: "SEPTEMBER 23, 2025",
-    title: "Last week in Amsterdam, the halls of IBC activity",
-    image: baseUrl + "/images/blog/blog_09.jpg",
-    link: "https://www.linkedin.com/posts/wecan-technology_last-week-in-amsterdam-the-halls-of-ibc-activity-7374805714273333248-mxL5?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAB5ttA8B3ClgPbLvv0Pk8d-2iUvUcSrhDWs",
-  },
-  {
-    date: "SEPTEMBER 10, 2025",
-    title: "WeCan participated at the Thessaloniki International Fair 2025",
-    image: baseUrl + "/images/blog/blog_08.jpg",
-    link: "https://www.linkedin.com/posts/wecan-technology_wecan-participated-at-the-thessaloniki-international-activity-7374444523588046848-Bd2-?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAB5ttA8B3ClgPbLvv0Pk8d-2iUvUcSrhDWs",
-  },
 ];
 
 export const featuredBlogPosts = allBlogPosts.slice(0, 3);
@@ -413,10 +371,14 @@ export const footerLinks = [
   // },
 
   { href: baseUrl + "/#blog", text: "Blog" },
-  {
-    href: baseUrl + "/#career",
-    text: "Career",
-  },
+  ...(showCareerSection
+    ? [
+        {
+          href: baseUrl + "/#career",
+          text: "Career",
+        },
+      ]
+    : []),
 ];
 
 export const footerContent = {

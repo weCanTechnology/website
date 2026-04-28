@@ -8,12 +8,19 @@ export interface Props {
   blogPosts: BlogPost[];
   isPage?: boolean;
   gridColumns?: number;
+  withBottomSpacing?: boolean;
 }
 
-const { blogPosts, isPage = false, gridColumns = 3 } = Astro.props;
+const { blogPosts, isPage = false, gridColumns = 3, withBottomSpacing = false } = Astro.props;
 ---
 
-<section id="blog" class="blog-section">
+<section
+  id="blog"
+  class:list={{
+    "blog-section": true,
+    "with-bottom-spacing": withBottomSpacing,
+  }}
+>
   <div class="container">
     <SectionHeader
       title={blogSectionContent.title}
@@ -41,6 +48,17 @@ const { blogPosts, isPage = false, gridColumns = 3 } = Astro.props;
   .blog-section {
     background-color: white;
   }
+
+  .blog-section.with-bottom-spacing {
+    padding-bottom: 80px;
+  }
+
+  @media (min-width: 1024px) {
+    .blog-section.with-bottom-spacing {
+      padding-bottom: 160px;
+    }
+  }
+
   .section-header {
     display: flex;
     justify-content: space-between;
@@ -92,7 +110,7 @@ const { blogPosts, isPage = false, gridColumns = 3 } = Astro.props;
  .card-image {
     width: 100%;
     display: block; 
-    aspect-ratio: 16 / 9;
+   aspect-ratio: 16 / 9;
     object-fit: cover;     
     border-top-left-radius: 12px;
     border-top-right-radius: 12px;
@@ -106,7 +124,7 @@ const { blogPosts, isPage = false, gridColumns = 3 } = Astro.props;
 
   .post-date {
     color: #3B3C3E;
-    font-family: font-family: var(--font-family-base);
+    font-family: var(--font-family-base);
     font-size: 12px;
     font-weight: 400;
     line-height: 1.3; /* 130% */
