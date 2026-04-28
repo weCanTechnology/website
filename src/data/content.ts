@@ -251,60 +251,57 @@ export const featuredWorkItems = allWorkItems.slice(0, 3);
 
 export const clients: Client[] = [
   {
-    name: "zain",
-    logo: baseUrl + "/icons/companies/blue/zain.png",
+    name: 'zain',
+    logo: baseUrl + '/icons/companies/blue/zain.png',
   },
   {
-    name: "tewa",
-    logo: baseUrl + "/icons/companies/blue/tewa.png",
+    name: 'tewa',
+    logo: baseUrl + '/icons/companies/blue/tewa.png',
   },
   {
-    name: "awt",
-    logo: baseUrl + "/icons/companies/blue/awt.png",
+    name: 'awt',
+    logo: baseUrl + '/icons/companies/blue/awt.png',
   },
   {
-    name: "kpmg",
-    logo: baseUrl + "/icons/companies/blue/kpmg.png",
+    name: 'kpmg',
+    logo: baseUrl + '/icons/companies/blue/kpmg.png',
   },
   {
-    name: "lufthansa",
-    logo: baseUrl + "/icons/companies/blue/lufthansa.png",
+    name: 'lufthansa',
+    logo: baseUrl + '/icons/companies/blue/lufthansa.png',
   },
   // {
   //   name: "Nordvik",
   //   logo: baseUrl +"/icons/companies/blue/nordvik.png",
   // },
-  {
-    name: "mckinsey",
-    logo: baseUrl + "/icons/companies/blue/mckinsey.png",
-  },
+
   // {
   //   name: "Dxc",
   //   logo: baseUrl +"/icons/companies/blue/dxc.png",
   // },
   {
-    name: "libri",
-    logo: baseUrl + "/icons/companies/blue/libri.png",
+    name: 'libri',
+    logo: baseUrl + '/icons/companies/blue/libri.png',
   },
   {
-    name: "oodi",
-    logo: baseUrl + "/icons/companies/blue/oodi.png",
+    name: 'oodi',
+    logo: baseUrl + '/icons/companies/blue/oodi.png',
   },
   {
-    name: "osn",
-    logo: baseUrl + "/icons/companies/blue/osn.png",
+    name: 'osn',
+    logo: baseUrl + '/icons/companies/blue/osn.png',
   },
   {
-    name: "swapp",
-    logo: baseUrl + "/icons/companies/blue/swapp.png",
+    name: 'swapp',
+    logo: baseUrl + '/icons/companies/blue/swapp.png',
   },
   {
-    name: "brightcove",
-    logo: baseUrl + "/icons/companies/blue/brightcove.png",
+    name: 'brightcove',
+    logo: baseUrl + '/icons/companies/blue/brightcove.png',
   },
   {
-    name: "innovationcity",
-    logo: baseUrl + "/icons/companies/blue/innovationcity.png",
+    name: 'innovationcity',
+    logo: baseUrl + '/icons/companies/blue/innovationcity.png',
   },
 ];
 
