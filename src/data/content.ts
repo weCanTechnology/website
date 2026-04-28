@@ -314,6 +314,24 @@ export const blogSectionContent = {
 
 export const allBlogPosts: BlogPost[] = [
   {
+    date: "APRIL 27, 2026",
+    title: "5 years, countless miles, and one incredible journey",
+    image: baseUrl + "/images/blog/1777280142196.jpeg",
+    link: "https://www.linkedin.com/posts/wecan-technology_5-years-countless-miles-and-one-incredible-activity-7454453214021685249-GP5K?utm_source=share&utm_medium=member_desktop&rcm=ACoAADbopjEBnF6WpUC85W5cEQe88RDuu_Hx9gI",
+  },
+  {
+    date: "APRIL 16, 2026",
+    title: "Meet Pall-E: WeCan Technology's AI team member",
+    image: baseUrl + "/images/blog/1776335928391.jpeg",
+    link: "https://www.linkedin.com/posts/wecan-technology_meet-pall-e-wecan-technologys-ai-team-activity-7450492895385747456-mRv0?utm_source=share&utm_medium=member_desktop&rcm=ACoAADbopjEBnF6WpUC85W5cEQe88RDuu_Hx9gI",
+  },
+  {
+    date: "FEBRUARY 10, 2026",
+    title: "Doha: the next milestone in our Middle East journey",
+    image: baseUrl + "/images/blog/1770722829922.jpeg",
+    link: "https://www.linkedin.com/posts/wecan-technology_doha-the-next-milestone-in-our-middle-east-activity-7426949859946987520-v5Uj?utm_source=share&utm_medium=member_desktop&rcm=ACoAADbopjEBnF6WpUC85W5cEQe88RDuu_Hx9gI",
+  },
+  {
     date: "JANUARY 26, 2026",
     title: "Going the extra mile, literally",
     image: baseUrl + "/images/blog/blog_16.jpg",
