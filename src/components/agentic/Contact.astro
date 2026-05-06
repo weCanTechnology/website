@@ -1,0 +1,20 @@
+---
+import Eyebrow from "./Eyebrow.astro";
+import Arrow from "./Arrow.astro";
+---
+<section id="contact" class="section" style="background:#011893;color:#fff;position:relative;overflow:hidden">
+  <div style="position:absolute;inset:0;background:radial-gradient(700px 400px at 80% 20%,rgba(32,187,190,.28),transparent 60%),radial-gradient(600px 400px at 10% 90%,rgba(91,109,238,.28),transparent 60%)"></div>
+  <div class="container" style="position:relative;text-align:center;padding:24px 20px">
+    <Eyebrow onDark>Contact</Eyebrow>
+    <h2 class="h-section on-dark" style="margin:16px auto 16px;color:#fff;max-width:680px">
+      Ready to put agents in production?
+    </h2>
+    <p class="lede on-dark" style="margin:0 auto 28px">
+      Tell us your use case. We'll come back with a fleet plan, a price, and a four-week path to live.
+    </p>
+    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+      <a href="mailto:hello@wecan.technology" class="btn btn-light">hello@wecan.technology <Arrow /></a>
+      <a href="https://wecan.technology" target="_blank" rel="noreferrer" class="btn btn-ghost-dark">About weCan <Arrow /></a>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,272 @@
+/* =========================================================================
+   weCan Technology — Colors & Type Foundations
+   =========================================================================
+   Derived from:
+   - /uploads/weCan_Technology_intro_2026_INT_SegoeUI 1.pptx (primary source)
+   - https://wecan.technology/ (brand colors & iconography)
+
+   Brand palette:
+     Primary Indigo        #011893  — headlines, primary surfaces, bold type
+     Deep Navy             #110049  — darkest surface / footer / logo eye
+     Electric Blue         #182CC4 / #182EC4 — accents, section "underscore" mark
+     Brand Teal            #20BBBE — primary accent, active states, highlights
+     Mint                  #7EE8D4 — secondary accent, AI / chip highlights
+     Ink                   #000000
+     White                 #FFFFFF
+
+   Signature gradient (icons, sparkle marks, CTA accents):
+     linear-gradient(135deg, #20BEBD 0%, #5B6DEE 100%)
+
+   ---- Typography -------------------------------------------------------
+   Body + UI:  Noto Sans   (humanist grotesque, Segoe-like proportions)
+   Display:    Sora        (geometric display sans, 200–800 weights)
+   Mono:       ui-monospace system stack
+   ========================================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800&family=Sora:wght@400;500;600;700;800&display=swap');
+
+:root {
+  /* ---------- Brand palette ---------- */
+  --wc-indigo-900:   #011893;
+  --wc-indigo-950:   #110049;
+  --wc-indigo-700:   #182CC4;
+  --wc-indigo-600:   #2B3FDE;   /* lighter hover tone */
+  --wc-indigo-500:   #5B6DEE;   /* gradient terminator */
+  --wc-indigo-200:   #BEC3EE;   /* lavender tint (logo target) */
+  --wc-indigo-100:   #E4E6F9;
+
+  --wc-teal-500:     #20BBBE;   /* brand teal */
+  --wc-teal-400:     #20BEBD;   /* gradient start (PPTX + web alt spelling) */
+  --wc-teal-200:     #7EE8D4;   /* mint */
+  --wc-teal-100:     #CFF4EA;
+
+  --wc-ink-1000:     #000000;
+  --wc-ink-900:      #0A0A14;
+  --wc-ink-700:      #2A2A3A;
+  --wc-ink-500:      #555569;
+  --wc-ink-300:      #9B9BA8;
+  --wc-ink-100:      #D9D9E0;
+
+  --wc-white:        #FFFFFF;
+  --wc-off-white:    #F6F7FB;
+
+  /* ---------- Semantic color tokens ---------- */
+  --wc-bg:           var(--wc-white);
+  --wc-bg-alt:       var(--wc-off-white);
+  --wc-bg-inverse:   var(--wc-indigo-950);        /* hero / footer */
+  --wc-bg-hero:      var(--wc-indigo-900);        /* deep blue sections */
+
+  --wc-fg-1:         var(--wc-ink-900);           /* primary text on light */
+  --wc-fg-2:         var(--wc-ink-700);           /* secondary text */
+  --wc-fg-3:         var(--wc-ink-500);           /* tertiary / meta */
+  --wc-fg-muted:     var(--wc-ink-300);
+  --wc-fg-inverse:   var(--wc-white);             /* primary text on dark */
+  --wc-fg-inverse-2: rgba(255,255,255,0.72);      /* secondary on dark */
+
+  --wc-accent:       var(--wc-indigo-700);        /* links, underscore, CTA */
+  --wc-accent-teal:  var(--wc-teal-500);          /* hover / highlight / AI */
+  --wc-border:       rgba(17, 0, 73, 0.08);
+  --wc-border-strong:rgba(17, 0, 73, 0.16);
+  --wc-border-dark:  rgba(255,255,255,0.12);
+
+  /* Status (utility only — brand does not feature them heavily) */
+  --wc-success:      #17B26A;
+  --wc-warning:      #F59E0B;
+  --wc-danger:       #E24D4D;
+  --wc-info:         var(--wc-teal-500);
+
+  /* ---------- Signature gradients ---------- */
+  --wc-gradient-brand:
+    linear-gradient(135deg, #20BEBD 0%, #5B6DEE 100%);
+  --wc-gradient-brand-soft:
+    linear-gradient(135deg, rgba(32,190,189,.18) 0%, rgba(91,109,238,.18) 100%);
+  --wc-gradient-hero:
+    radial-gradient(1200px 800px at 15% 25%, rgba(91,109,238,.28) 0%, transparent 55%),
+    radial-gradient(900px 700px at 85% 80%, rgba(32,187,190,.22) 0%, transparent 60%),
+    linear-gradient(180deg, #011893 0%, #110049 100%);
+  --wc-gradient-navy-fade:
+    linear-gradient(180deg, #011893 0%, #110049 100%);
+
+  /* ---------- Typography ---------- */
+  --wc-font-sans: 'Noto Sans', system-ui, -apple-system,
+                  'Helvetica Neue', Arial, sans-serif;
+  --wc-font-display: 'Sora', 'Noto Sans', sans-serif;
+  --wc-font-mono: ui-monospace, 'JetBrains Mono', SFMono-Regular, Menlo,
+                  Consolas, monospace;
+
+  /* Type scale — tuned to PPTX slide master (very large headlines,
+     tight modest body). */
+  --wc-fs-display: clamp(3rem, 6vw, 5.75rem);   /* 48–92px hero */
+  --wc-fs-h1:      clamp(2.25rem, 3.6vw, 3.5rem); /* 36–56px section */
+  --wc-fs-h2:      clamp(1.75rem, 2.4vw, 2.25rem);/* 28–36px */
+  --wc-fs-h3:      1.375rem;    /* 22px */
+  --wc-fs-h4:      1.125rem;    /* 18px */
+  --wc-fs-body:    1rem;        /* 16px */
+  --wc-fs-small:   0.875rem;    /* 14px */
+  --wc-fs-micro:   0.75rem;     /* 12px */
+  --wc-fs-eyebrow: 0.8125rem;   /* 13px — allcaps tracked labels */
+
+  --wc-lh-tight:   1.08;
+  --wc-lh-snug:    1.2;
+  --wc-lh-normal:  1.5;
+  --wc-lh-relaxed: 1.65;
+
+  --wc-tracking-display: -0.02em;
+  --wc-tracking-headline:-0.01em;
+  --wc-tracking-body:    0;
+  --wc-tracking-eyebrow: 0.16em;  /* ALL-CAPS label tracking */
+
+  /* ---------- Spacing (4px base) ---------- */
+  --wc-space-1:  4px;
+  --wc-space-2:  8px;
+  --wc-space-3:  12px;
+  --wc-space-4:  16px;
+  --wc-space-5:  24px;
+  --wc-space-6:  32px;
+  --wc-space-7:  48px;
+  --wc-space-8:  64px;
+  --wc-space-9:  96px;
+  --wc-space-10: 128px;
+
+  /* ---------- Radius ---------- */
+  --wc-radius-0:   0px;          /* hard corners — brand default */
+  --wc-radius-1:   4px;          /* subtle rounding */
+  --wc-radius-2:   8px;          /* chips / small cards */
+  --wc-radius-3:   14px;         /* map pins / callouts */
+  --wc-radius-4:   20px;         /* feature cards (web site) */
+  --wc-radius-pill: 999px;       /* tags / buttons (arrow-pills) */
+
+  /* ---------- Shadow / elevation ---------- */
+  --wc-shadow-0: none;
+  --wc-shadow-1: 0 1px 2px rgba(17,0,73,.04),
+                 0 1px 3px rgba(17,0,73,.06);
+  --wc-shadow-2: 0 4px 12px rgba(17,0,73,.08),
+                 0 2px 4px rgba(17,0,73,.04);
+  --wc-shadow-3: 0 18px 40px -12px rgba(17,0,73,.22),
+                 0 6px 14px rgba(17,0,73,.08);
+  --wc-shadow-glow-teal:
+    0 0 0 1px rgba(32,187,190,.3),
+    0 10px 30px -6px rgba(32,187,190,.45);
+  --wc-shadow-glow-indigo:
+    0 0 0 1px rgba(91,109,238,.3),
+    0 10px 30px -6px rgba(91,109,238,.45);
+
+  /* ---------- Motion ---------- */
+  --wc-ease-out:    cubic-bezier(0.22, 1, 0.36, 1);
+  --wc-ease-inout:  cubic-bezier(0.65, 0, 0.35, 1);
+  --wc-dur-fast:   120ms;
+  --wc-dur-base:   220ms;
+  --wc-dur-slow:   420ms;
+}
+
+/* ========================================================================
+   Semantic element styles
+   ======================================================================== */
+
+.wc-display,
+.wc-h1, .wc-h2, .wc-h3, .wc-h4 {
+  font-family: var(--wc-font-display);
+  color: var(--wc-fg-1);
+  letter-spacing: var(--wc-tracking-headline);
+  line-height: var(--wc-lh-tight);
+  text-wrap: balance;
+  margin: 0;
+}
+
+.wc-display {
+  font-size: var(--wc-fs-display);
+  font-weight: 300;                          /* light display, à la Segoe UI Light */
+  letter-spacing: var(--wc-tracking-display);
+  line-height: 1.02;
+}
+.wc-display--bold {
+  font-weight: 800;
+  font-family: var(--wc-font-display);
+}
+
+.wc-h1 { font-size: var(--wc-fs-h1); font-weight: 700; }
+.wc-h2 { font-size: var(--wc-fs-h2); font-weight: 700; line-height: var(--wc-lh-snug); }
+.wc-h3 { font-size: var(--wc-fs-h3); font-weight: 600; line-height: var(--wc-lh-snug); }
+.wc-h4 { font-size: var(--wc-fs-h4); font-weight: 600; line-height: var(--wc-lh-snug); }
+
+.wc-body {
+  font-family: var(--wc-font-sans);
+  font-size: var(--wc-fs-body);
+  font-weight: 400;
+  line-height: var(--wc-lh-relaxed);
+  color: var(--wc-fg-2);
+}
+.wc-body--strong { color: var(--wc-fg-1); font-weight: 500; }
+
+.wc-small {
+  font-family: var(--wc-font-sans);
+  font-size: var(--wc-fs-small);
+  line-height: var(--wc-lh-normal);
+  color: var(--wc-fg-3);
+}
+
+.wc-micro {
+  font-family: var(--wc-font-sans);
+  font-size: var(--wc-fs-micro);
+  line-height: var(--wc-lh-normal);
+  color: var(--wc-fg-3);
+}
+
+/* Signature eyebrow label — allcaps, tracked, small — appears above
+   every section title in decks + site (e.g. "GLOBAL COVERAGE",
+   "WE THINK BUSINESS"). */
+.wc-eyebrow {
+  font-family: var(--wc-font-sans);
+  font-size: var(--wc-fs-eyebrow);
+  font-weight: 600;
+  letter-spacing: var(--wc-tracking-eyebrow);
+  text-transform: uppercase;
+  color: var(--wc-accent);
+  line-height: 1;
+}
+.wc-eyebrow--on-dark { color: var(--wc-teal-500); }
+
+/* Three-part stacked section title signature (e.g. WE / THINK / BUSINESS).
+   The PPTX uses huge weight-contrast: mid word bold, outers light. */
+.wc-stacked-title {
+  font-family: var(--wc-font-display);
+  display: grid;
+  gap: .1em;
+  line-height: 0.88;
+  letter-spacing: -0.02em;
+}
+.wc-stacked-title > .light { font-weight: 200; }
+.wc-stacked-title > .bold  { font-weight: 800; color: var(--wc-indigo-700); }
+
+/* The signature "underscore" mark used as a section header prefix */
+.wc-underscore {
+  display: inline-block;
+  width: 100px; height: 8px;
+  background:
+    linear-gradient(to right,
+      var(--wc-indigo-700) 0 67%,
+      transparent 67% 75%,
+      var(--wc-indigo-700) 75% 83%,
+      transparent 83% 91%,
+      var(--wc-indigo-700) 91% 100%);
+}
+
+.wc-link {
+  color: var(--wc-accent);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: color var(--wc-dur-fast) var(--wc-ease-out),
+              border-color var(--wc-dur-fast) var(--wc-ease-out);
+}
+.wc-link:hover { color: var(--wc-accent-teal); border-bottom-color: currentColor; }
+
+/* Mono / code */
+.wc-code {
+  font-family: var(--wc-font-mono);
+  font-size: 0.9em;
+  background: var(--wc-bg-alt);
+  border: 1px solid var(--wc-border);
+  border-radius: var(--wc-radius-1);
+  padding: .15em .4em;
+  color: var(--wc-indigo-900);
+}

@@ -1,0 +1,144 @@
+---
+import Eyebrow from "./Eyebrow.astro";
+
+type TileProps = { icon?: string; title: string; body: string; items?: string[] };
+const Tile = (p: TileProps) => p; // markup below
+
+const capabilities: TileProps[] = [
+  { icon: "✎", title: "Declarative Agents",        body: "Agents defined declaratively. Model, prompt, tools, knowledge, no engineering required to ship one.", items: ["Use any major LLM","Automatic model fallback","Plug-in tool integration","Hot reload on save"] },
+  { icon: "✦", title: "Multi-Agent Orchestration", body: "Root agents coordinate sub-agent teams with shared state and a clear chain of command.",               items: ["Dynamic agent selection","Context propagation","Remote sub-agents","Nested orchestration"] },
+  { icon: "⚙", title: "Flow Engine",                body: "Reproducible state machines for multi-step processes, agent tasks, LLM decisions, and human checkpoints, all in one flow.", items: ["Template variables","Conditional branching","Sub-flow composition","Timeout handling"] },
+  { icon: "◇", title: "Multi-Channel",              body: "One agent, every channel. Rich UI on web; automatic text fallback on Teams and WhatsApp.",                items: ["Web with live streaming","Microsoft Teams","WhatsApp","Pause & resume across channels"] },
+  { icon: "◎", title: "Self-Learning",              body: "Agents capture insights from feedback. A supervising model validates every learning before it sticks.", items: ["Autonomous recognition","Three-tier validation","Persistent memory","Injected into future prompts"] },
+  { icon: "≡", title: "Knowledge Base",             body: "Built-in vector store with chunking, collection management, and auto-retrieval.",                       items: ["Upload via web UI","Per-agent collections","Pluggable embeddings","Auto-inject context"] },
+];
+
+const observability: TileProps[] = [
+  { icon: "◼", title: "Live Dashboards",      body: "Pre-built views for agent latency, throughput, and system health." },
+  { icon: "◈", title: "Distributed Traces",   body: "Full span waterfall from task to tool call, see exactly where time goes." },
+  { icon: "△", title: "Metrics & Trends",     body: "Latency, token usage, cost trends, run counts, all retained." },
+  { icon: "○", title: "LLM Analytics",        body: "Prompt tracking, agent graphs, and cost attribution by model." },
+];
+
+const archTiles: TileProps[] = [
+  { title: "Isolated Projects",   body: "Each project runs in its own container with dedicated environment and resources." },
+  { title: "Scaffolding Wizard",  body: "Generate a new project skeleton, agents, flows, and configs, in a single command." },
+  { title: "Hot Reload",          body: "Change any agent definition and it reloads instantly. No restart. No downtime. No deploy." },
+  { title: "Git-Native",          body: "All definitions live in Git. Version everything, roll back anything, review every change." },
+];
+
+const flowNodes = [
+  { icon: "▶",  name: "Trigger",       sub: "manual / webhook" },
+  { icon: "🤖", name: "Agent Task",    sub: "calendar_agent" },
+  { icon: "◎",  name: "LLM Decision",  sub: "evaluate & route" },
+  { icon: "👤", name: "Human Review",  sub: "approve / reject" },
+  { icon: "✓",  name: "Complete",      sub: "terminal state" },
+];
+---
+<section id="platform" class="section" style="background:#fff">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <Eyebrow>Our Platform</Eyebrow>
+        <h2 class="h-section" style="margin-top:14px">What our platform does.</h2>
+      </div>
+      <p class="lede">Six foundational capabilities covering the full lifecycle of building, deploying, and operating enterprise AI agents.</p>
+    </div>
+    <div class="grid grid-3">
+      {capabilities.map(t => (
+        <div class="card">
+          {t.icon && <div class="card-icon">{t.icon}</div>}
+          <h3 class="card-title">{t.title}</h3>
+          <p class="card-body">{t.body}</p>
+          {t.items && <ul class="card-list">{t.items.map(i => <li>{i}</li>)}</ul>}
+        </div>
+      ))}
+    </div>
+
+    <div class="grid grid-2" style="margin-top:14px">
+      <div class="card">
+        <span style="font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--wc-teal-500)">Composable skills</span>
+        <h3 class="card-title" style="margin-top:8px">Reusable capability packages</h3>
+        <p class="card-body">Bundle tools, knowledge bases, sub-agents, and a prompt into shareable skill units. Skill prompts merge into the system prompt at runtime.</p>
+      </div>
+      <div class="card soft">
+        <span style="font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--wc-indigo-700)">Real-time cost tracking</span>
+        <h3 class="card-title" style="margin-top:8px">Know what every agent costs</h3>
+        <p class="card-body">Every LLM call, tool invocation, and delegation is tracked with per-model token pricing. Aggregate by task, flow, agent, or event with hierarchical drill-down.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section-tight" style="background:#F6F7FB">
+  <div class="container">
+    <div class="section-head" style="margin-bottom:32px">
+      <div>
+        <Eyebrow>Flow engine</Eyebrow>
+        <h2 class="h-section" style="margin-top:14px">Multi-step workflows, visually.</h2>
+      </div>
+      <p class="lede">Compose agent tasks, LLM decisions, and human checkpoints into reproducible state machines, visual, versioned, and reviewable.</p>
+    </div>
+    <div class="flow-strip">
+      {flowNodes.map((n, i) => (
+        <>
+          <div style="text-align:center;padding:8px 16px;min-width:120px">
+            <div style="width:48px;height:48px;border-radius:14px;margin:0 auto 10px;background:#fff;border:1px solid var(--wc-border);display:inline-flex;align-items:center;justify-content:center;color:var(--wc-indigo-700);font-size:18px;box-shadow:0 4px 12px rgba(17,0,73,.08)">{n.icon}</div>
+            <div style="font-family:Sora,sans-serif;font-weight:700;font-size:14px;color:var(--wc-fg-1)">{n.name}</div>
+            <div style="font-family:ui-monospace, monospace;font-size:11px;color:var(--wc-fg-3);margin-top:2px">{n.sub}</div>
+          </div>
+          {i < flowNodes.length - 1 && (
+            <div class="flow-arrow" style="color:var(--wc-teal-500);font-size:22px;padding:0 4px;display:flex;align-items:center;justify-content:center">→</div>
+          )}
+        </>
+      ))}
+    </div>
+  </div>
+</section>
+
+<section class="section-tight" style="background:#F6F7FB;padding-top:0">
+  <div class="container">
+    <div class="section-head" style="margin-bottom:32px">
+      <div>
+        <Eyebrow>Observability</Eyebrow>
+        <h2 class="h-section" style="margin-top:14px">Three-level monitoring, zero config.</h2>
+      </div>
+      <p class="lede">Every observability layer is pre-configured out of the box, with zero overhead when disabled. One click takes you from a frontend trace to the underlying call.</p>
+    </div>
+    <div class="grid grid-4">
+      {observability.map(t => (
+        <div class="card">
+          {t.icon && <div class="card-icon">{t.icon}</div>}
+          <h3 class="card-title">{t.title}</h3>
+          <p class="card-body">{t.body}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<section class="section" style="background:#fff">
+  <div class="container">
+    <div class="arch-pair">
+      <div>
+        <Eyebrow>Architecture</Eyebrow>
+        <h2 class="h-section" style="margin-top:14px;margin-bottom:14px">Open protocols. Federated by design.</h2>
+        <p class="lede">Agents talk to each other on open, industry-standard protocols. They discover each other, route by capability, and stream results in real time, across teams, departments, even external partners.</p>
+      </div>
+      <div class="card">
+        <span style="font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--wc-teal-500)">Expose & discover</span>
+        <h3 class="card-title" style="margin-top:8px">Any agent, instantly federated</h3>
+        <p class="card-body">Flag an agent as exposed and it's reachable across your fleet, with capability-based discovery and session continuity built in.</p>
+      </div>
+    </div>
+
+    <div class="grid grid-4" style="margin-bottom:48px">
+      {archTiles.map(t => (
+        <div class="card">
+          <h3 class="card-title">{t.title}</h3>
+          <p class="card-body">{t.body}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

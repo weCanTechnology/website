@@ -1,0 +1,148 @@
+---
+import Eyebrow from "./Eyebrow.astro";
+
+const cards = [
+  {
+    tag: "A",
+    sub: "Buy SaaS",
+    title: "Rent capability",
+    body: "Polished demos, vendor lock-in. Per-message pricing spirals. Your agents live in their format, on their cloud.",
+    items: ["Proprietary runtime", "Per-message billing", "Vendor sets the roadmap", "Data on their cloud"],
+    tone: "bad",
+  },
+  {
+    tag: "B",
+    sub: "Build in-house",
+    title: "Become a vendor",
+    body: "Full control on paper. In practice, an internal project that quietly grows into a product your team has to own.",
+    items: ["High initial cost", "No 2 a.m. vendor", "Upgrades are your backlog", "Key-person risk"],
+    tone: "warn",
+  },
+  {
+    tag: "C",
+    sub: "Our Way",
+    title: "Compact. Enterprise-grade.",
+    body: "Industry-standard stack. Agents live as portable definitions in your repo. Fixed fleet pricing. We run it with you, not for you.",
+    items: ["Built on open protocols", "Portable definitions in your repo", "Fixed fleet pricing", "Co-managed, not handed off"],
+    tone: "us",
+  },
+];
+
+const rows: [string, string, string, string][] = [
+  ["Lock-in",            "Total. Their format.",     "None, but you own everything", "None. Open standards, your repo"],
+  ["Time to first agent","Days&mdash;then years stuck", "Months of platform work first", "Weeks. Real ones, in production"],
+  ["Hosting",            "Their cloud only",         "Your problem to scale",        "One container. Your cloud or ours"],
+  ["Maintenance",        "You wait for their fixes", "You build the team for it",    "We handle it. You ship agents"],
+  ["Pricing model",      "Per-message, unbounded",   "Salaries, indefinitely",       "Fixed fleet fee. Predictable"],
+  ["Best fit",           "Small teams, simple use",  "Big-tech R&amp;D budgets",         "Mid-market to enterprise"],
+];
+---
+<section id="our-way" class="section" style="background:#F6F7FB">
+  <div class="container">
+    <Eyebrow>Our Way</Eyebrow>
+    <h2 class="h-section" style="margin-top:14px;margin-bottom:14px">
+      Two paths lead to regret.<br/>There is a third.
+    </h2>
+    <p class="lede" style="margin-bottom:48px;max-width:760px">
+      Buy SaaS and rent capability inside someone else&rsquo;s walls. Build in-house and own a product you never planned to ship. Or take our way.
+    </p>
+
+    <div class="ourway-grid" style="
+      display:grid;
+      grid-template-columns:minmax(0,1fr) minmax(0,1fr) minmax(0,1.55fr);
+      gap:20px;align-items:stretch;margin-bottom:36px;">
+      {cards.map(p => {
+        const isUs = p.tone === "us";
+        const cardStyle = isUs
+          ? "border-radius:18px;padding:32px 32px 28px;background:linear-gradient(160deg, #110049 0%, #011893 60%, #1a3aa8 100%);border:1px solid rgba(126,232,212,.45);position:relative;box-shadow:0 24px 48px -16px rgba(17,0,73,.35), 0 0 0 6px rgba(32,187,190,.06), 0 0 60px -10px rgba(32,187,190,.35);color:#fff;transform:translateY(-8px);overflow:hidden"
+          : "border-radius:14px;padding:22px 22px 20px;background:rgba(245,246,250,.6);border:1px dashed rgba(10,10,20,.18);position:relative;opacity:.72;filter:saturate(.4);color:var(--wc-fg-2);overflow:hidden";
+        return (
+          <div style={cardStyle}>
+            {isUs && (
+              <span style="position:absolute;top:18px;right:18px;font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#110049;background:#7EE8D4;padding:5px 9px;border-radius:999px">Recommended</span>
+            )}
+            {isUs && (
+              <div aria-hidden="true" style="position:absolute;inset:0;pointer-events:none;background:radial-gradient(600px 360px at 80% 0%, rgba(32,187,190,.22) 0%, transparent 60%), radial-gradient(500px 380px at 0% 100%, rgba(91,109,238,.25) 0%, transparent 60%)"></div>
+            )}
+            <div style={`display:flex;align-items:center;gap:10px;margin-bottom:${isUs ? 16 : 14}px;position:relative`}>
+              <span style={isUs
+                ? "width:26px;height:26px;border-radius:6px;display:inline-flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;background:#7EE8D4;color:#110049"
+                : "width:20px;height:20px;border-radius:6px;display:inline-flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;background:transparent;color:rgba(10,10,20,.45);border:1px solid rgba(10,10,20,.2)"
+              }>{p.tag}</span>
+              <span style={`font-size:${isUs ? 11 : 10}px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:${isUs ? "#7EE8D4" : "rgba(10,10,20,.45)"}`}>{p.sub}</span>
+            </div>
+            <h3 style={`font-family:Sora,sans-serif;font-weight:${isUs ? 700 : 500};font-size:${isUs ? 28 : 17}px;margin:0 0 10px;color:${isUs ? "#fff" : "rgba(10,10,20,.55)"};letter-spacing:-.015em;line-height:1.15;${!isUs ? "text-decoration:line-through;text-decoration-color:rgba(226,77,77,.55);text-decoration-thickness:1.5px;" : ""}position:relative`}>{p.title}</h3>
+            <p style={`font-size:${isUs ? 15 : 13}px;line-height:1.55;margin:0 0 16px;color:${isUs ? "rgba(255,255,255,.82)" : "rgba(10,10,20,.5)"};position:relative`}>{p.body}</p>
+            <ul style={`list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:${isUs ? 8 : 5}px;border-top:${isUs ? "1px solid rgba(126,232,212,.2)" : "1px solid rgba(10,10,20,.08)"};padding-top:${isUs ? 16 : 12}px;position:relative`}>
+              {p.items.map(it => (
+                <li style={`font-size:${isUs ? 13.5 : 12}px;color:${isUs ? "rgba(255,255,255,.92)" : "rgba(10,10,20,.45)"};padding-left:18px;position:relative;line-height:1.5`}>
+                  {isUs
+                    ? <span style="position:absolute;left:0;top:3px;color:#7EE8D4;font-size:13px;font-weight:700">✓</span>
+                    : <span style="position:absolute;left:2px;top:3px;color:rgba(226,77,77,.5);font-size:12px;font-weight:600">✕</span>
+                  }
+                  {it}
+                </li>
+              ))}
+            </ul>
+          </div>
+        );
+      })}
+    </div>
+
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <thead>
+          <tr>
+            <th aria-label="criterion"></th>
+            <th>Buy SaaS</th>
+            <th>Build in-house</th>
+            <th class="us">Our Way</th>
+          </tr>
+        </thead>
+        <tbody>
+          {rows.map(row => (
+            <tr>
+              <td set:html={row[0]}></td>
+              <td set:html={row[1]}></td>
+              <td set:html={row[2]}></td>
+              <td class="us" set:html={row[3]}></td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+
+    <div class="tbl-cards">
+      {[
+        { tag: "Path A", name: "Buy SaaS", col: 1 },
+        { tag: "Path B", name: "Build in-house", col: 2 },
+        { tag: "Path C · Recommended", name: "Our Way", col: 3, us: true },
+      ].map(p => (
+        <div class={"tbl-card" + (p.us ? " us" : "")}>
+          <div class="card-tag">{p.tag}</div>
+          <span class="card-name">{p.name}</span>
+          <div class="card-rows">
+            {rows.map(r => (
+              <div class="card-row">
+                <span class="k" set:html={r[0]}></span>
+                <span class="v" set:html={r[p.col as 1 | 2 | 3]}></span>
+              </div>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <div class="guarantee">
+      <span class="guarantee-tag">The guarantee</span>
+      <p>Your agents are portable definitions in your repo. Your tools use open protocols. Your data runs on your infrastructure. If you ever choose to leave, there&rsquo;s nothing to extract or migrate&mdash;you take your repo, and everything moves with you. That&rsquo;s the difference between a partner and a prison.</p>
+    </div>
+  </div>
+</section>
+
+<style>
+  @media (max-width: 900px) {
+    .ourway-grid { grid-template-columns: 1fr !important; }
+    .ourway-grid > div { transform: none !important; }
+  }
+</style>

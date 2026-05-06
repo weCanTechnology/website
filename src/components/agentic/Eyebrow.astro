@@ -1,0 +1,5 @@
+---
+// Shared snippets: Eyebrow, Arrow. Import where needed.
+const { children, onDark } = Astro.props;
+---
+<span class={"eyebrow" + (onDark ? " on-dark" : "")}><slot /></span>

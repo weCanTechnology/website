@@ -1,0 +1,76 @@
+---
+import Arrow from "./Arrow.astro";
+const { dark = true } = Astro.props;
+const links = [
+  { href: "#our-way",  label: "Our Way" },
+  { href: "#platform", label: "Our Platform" },
+  { href: "#pricing",  label: "Pricing" },
+];
+---
+<header class={"nav" + (dark ? " dark" : "")} data-nav>
+  <div class="nav-row">
+    <a href="#top" class="nav-logo">
+      <span class="dot"></span>
+      <span>Agentic</span>
+      <span class="sub">by weCan</span>
+    </a>
+    <nav class="nav-links">
+      {links.map(l => <a href={l.href} data-nav-link={l.href.slice(1)}>{l.label}</a>)}
+    </nav>
+    <a href="#contact" class="btn btn-primary nav-cta">
+      Contact us <Arrow />
+    </a>
+    <button class="nav-burger" aria-label="Open menu" aria-expanded="false" data-nav-burger>
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+
+  <div class="nav-drawer" data-nav-drawer>
+    <div class="nav-drawer-inner">
+      {links.map(l => <a href={l.href} data-nav-link={l.href.slice(1)}>{l.label}</a>)}
+      <a href="#contact" class="btn btn-primary" style="margin-top:8px;justify-content:center" data-nav-close>
+        Contact us <Arrow />
+      </a>
+    </div>
+  </div>
+</header>
+
+<script>
+  // Scroll-spy + mobile drawer. Vanilla JS, no deps.
+  const nav = document.querySelector("[data-nav]");
+  if (nav) {
+    const burger = nav.querySelector("[data-nav-burger]");
+    const drawer = nav.querySelector("[data-nav-drawer]");
+    const links = nav.querySelectorAll("[data-nav-link]");
+
+    const setOpen = (open) => {
+      nav.classList.toggle("open", open);
+      drawer?.classList.toggle("show", open);
+      burger?.setAttribute("aria-expanded", String(open));
+      burger?.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+      document.body.style.overflow = open ? "hidden" : "";
+      // Animate burger to X
+      const spans = burger?.querySelectorAll("span");
+      if (spans && spans.length === 3) {
+        spans[0].style.transform = open ? "translateY(5px) rotate(45deg)" : "";
+        spans[1].style.opacity = open ? "0" : "1";
+        spans[2].style.transform = open ? "translateY(-5px) rotate(-45deg)" : "";
+      }
+    };
+    burger?.addEventListener("click", () => setOpen(!nav.classList.contains("open")));
+    drawer?.querySelectorAll("a").forEach(a => a.addEventListener("click", () => setOpen(false)));
+
+    // Active-link highlight via IntersectionObserver
+    const ids = ["top", "our-way", "platform", "pricing", "contact"];
+    const setActive = (id) => {
+      links.forEach(a => a.classList.toggle("active", a.dataset.navLink === id));
+    };
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) setActive(e.target.id); });
+    }, { rootMargin: "-40% 0px -50% 0px" });
+    ids.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) obs.observe(el);
+    });
+  }
+</script>

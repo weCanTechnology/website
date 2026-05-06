@@ -1,4 +1,35 @@
 ---
-import agenticHtml from '../../data/agentic-standalone.html?raw';
+import Nav from "../../components/agentic/Nav.astro";
+import Hero from "../../components/agentic/Hero.astro";
+import OurWay from "../../components/agentic/OurWay.astro";
+import Platform from "../../components/agentic/Platform.astro";
+import Pricing from "../../components/agentic/Pricing.astro";
+import Contact from "../../components/agentic/Contact.astro";
+import Footer from "../../components/agentic/Footer.astro";
+
+import "../../styles/colors_and_type.css";
+import "../../styles/agentic.css";
 ---
-<Fragment set:html={agenticHtml} />
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>Agentic - by weCan Technology</title>
+		<meta
+			name="description"
+			content="An enterprise agentic AI platform. Ship a fleet of AI agents on open protocols, with portable definitions, observability and exit-options."
+		/>
+		<meta name="robots" content="noindex, nofollow" />
+	</head>
+	<body>
+		<Nav dark={true} />
+		<Hero />
+		<OurWay />
+		<Platform />
+		<Pricing />
+		<Contact />
+		<Footer />
+	</body>
+</html>
