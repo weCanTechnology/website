@@ -1,0 +1,127 @@
+---
+import Eyebrow from "./Eyebrow.astro";
+
+type SecurityCardProps = { icon: string; title: string; body: string; items: string[] };
+type StandardProps = { label: string; note: string; color: string; badge: string };
+
+const securityFeatures: SecurityCardProps[] = [
+  {
+    icon: "⬡",
+    title: "Agent execution boundaries",
+    body: "Every agent runs under the original caller's identity. Tools inherit the user's JWT on each request preventing privilege escalation by design.",
+    items: [
+      "Zero Trust propagation: API → ADK Runtime → MCP",
+      "Per-request identity on all remote HTTP tools",
+      "Explicit tool whitelisting per agent definition",
+      "Two-layer rate limiting: gateway + per-route backend",
+    ],
+  },
+  {
+    icon: "◈",
+    title: "Audit trail & observability",
+    body: "Every task, LLM call, and schedule fire produces a traceable record. Click any event in the UI and land on the full Grafana Tempo waterfall.",
+    items: [
+      "OpenTelemetry spans: Task → Agent → LLM → Tool",
+      "Langfuse cost & delegation graph per agent",
+      "Schedule runs logged: trigger, attempt, cost, error",
+      "Service account changes audited with operator identity",
+    ],
+  },
+  {
+    icon: "⇄",
+    title: "Data flow controls",
+    body: "Agent responses are schema-validated before reaching users. Self-learning proposals pass through an Overseer LLM enforcing platform-, project-, and agent-level policies.",
+    items: [
+      "A2UI schema validation on every agent output",
+      "Overseer gate: platform → project → agent policy chain",
+      "PII baseline: names, emails, phone numbers blocked",
+      "Safe fallback to plain text on validation failure",
+    ],
+  },
+  {
+    icon: "◎",
+    title: "Human-in-the-loop gates",
+    body: "Flows pause for structured human approval at any checkpoint. Failed schedules retry on configurable backoff and escalate to Teams or WhatsApp before giving up.",
+    items: [
+      "Approve / reject / cancel at explicit flow checkpoints",
+      "Overseer approval gate for every self-learning proposal",
+      "Retry with backoff (60s → 5m → 15m) + ops notification",
+      "All decisions logged to the learning_records audit table",
+    ],
+  },
+];
+
+const standards: StandardProps[] = [
+  { label: "OAuth 2.0 / OIDC / PKCE",  color: "var(--wc-teal-500)",    badge: "Live",      note: "Zitadel + JWKS RS256, IdP-agnostic — Keycloak, Azure AD drop-in" },
+  { label: "JWT RFC 7519 · RFC 6750",   color: "var(--wc-teal-500)",    badge: "Live",      note: "Signed tokens propagated end-to-end, per-request to every tool" },
+  { label: "RBAC — 4-tier model",       color: "var(--wc-teal-500)",    badge: "Live",      note: "Platform / project / agent / resource permissions on all endpoints" },
+  { label: "OWASP LLM Top 10",          color: "var(--wc-teal-500)",    badge: "Compliant", note: "Platform controls address the LLM Top 10 across prompt, tool, and data layers" },
+  { label: "OpenTelemetry",             color: "var(--wc-teal-500)",    badge: "Live",      note: "Full OTLP/gRPC trace export to Grafana Tempo, zero config required" },
+  { label: "SPIFFE / SPIRE",            color: "rgba(255,255,255,.38)", badge: "Roadmap",   note: "Planned: automatic certificate rotation for multi-tenant workload identity" },
+];
+---
+
+<section id="security" class="section glow-bg">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <Eyebrow onDark={true}>Security & Control</Eyebrow>
+        <h2 class="h-section on-dark" style="margin-top:14px">Enterprise-grade safety,<br/>every layer.</h2>
+      </div>
+      <p class="lede on-dark">Four pillars of agent safety: bounded execution with identity propagation, complete auditability, schema-enforced data flow, and human oversight at every critical gate.</p>
+    </div>
+    <div class="grid grid-4">
+      {securityFeatures.map(t => (
+        <div class="card dark">
+          <div class="card-icon" style="font-size:18px">{t.icon}</div>
+          <h3 class="card-title">{t.title}</h3>
+          <p class="card-body">{t.body}</p>
+          <ul class="card-list">
+            {t.items.map(i => <li>{i}</li>)}
+          </ul>
+        </div>
+      ))}
+    </div>
+
+    <div style="margin-top:32px;border-top:1px solid rgba(255,255,255,.1);padding-top:32px">
+      <p style="font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.4);margin:0 0 20px">Standards & compliance</p>
+      <div class="standards-grid">
+        {standards.map(s => (
+            <div class="standard-card">
+              <div class="standard-top">
+                <span style="font-family:Sora,sans-serif;font-weight:600;font-size:13px;color:#fff;line-height:1.25;min-width:0;white-space:normal">{s.label}</span>
+                <span style={`font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:${s.color};white-space:nowrap`}>{s.badge}</span>
+              </div>
+              <p style="font-size:12px;color:rgba(255,255,255,.5);margin:0;line-height:1.5">{s.note}</p>
+            </div>
+          ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .standards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    gap: 12px;
+  }
+
+  .standard-card {
+    background: rgba(255,255,255,.04);
+    border: 1px solid rgba(255,255,255,.08);
+    border-radius: 12px;
+    padding: 14px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .standard-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    min-width: 0;
+  }
+</style>

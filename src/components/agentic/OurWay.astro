@@ -20,7 +20,7 @@ const cards = [
   },
   {
     tag: "C",
-    sub: "Our Way",
+    sub: "The Third Way",
     title: "Compact. Enterprise-grade.",
     body: "Industry-standard stack. Agents live as portable definitions in your repo. Fixed fleet pricing. We run it with you, not for you.",
     items: ["Built on open protocols", "Portable definitions in your repo", "Fixed fleet pricing", "Co-managed, not handed off"],
@@ -39,7 +39,7 @@ const rows: [string, string, string, string][] = [
 ---
 <section id="our-way" class="section" style="background:#F6F7FB">
   <div class="container">
-    <Eyebrow>Our Way</Eyebrow>
+    <Eyebrow>The Third Way</Eyebrow>
     <h2 class="h-section" style="margin-top:14px;margin-bottom:14px">
       Two paths lead to regret.<br/>There is a third.
     </h2>
@@ -96,7 +96,7 @@ const rows: [string, string, string, string][] = [
             <th aria-label="criterion"></th>
             <th>Buy SaaS</th>
             <th>Build in-house</th>
-            <th class="us">Our Way</th>
+            <th class="us">The Third Way</th>
           </tr>
         </thead>
         <tbody>
@@ -116,7 +116,7 @@ const rows: [string, string, string, string][] = [
       {[
         { tag: "Path A", name: "Buy SaaS", col: 1 },
         { tag: "Path B", name: "Build in-house", col: 2 },
-        { tag: "Path C · Recommended", name: "Our Way", col: 3, us: true },
+        { tag: "Path C · Recommended", name: "The Third Way", col: 3, us: true },
       ].map(p => (
         <div class={"tbl-card" + (p.us ? " us" : "")}>
           <div class="card-tag">{p.tag}</div>

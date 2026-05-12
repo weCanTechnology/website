@@ -24,7 +24,7 @@ const monthly = [
     <div class="section-head">
       <div>
         <Eyebrow>Pricing</Eyebrow>
-        <h2 class="h-section" style="margin-top:14px">Pay for complexity, not chatter.</h2>
+        <h2 class="h-section" style="margin-top:14px">Flat fleet pricing. Zero token surprises.</h2>
       </div>
       <p class="lede">A flat monthly platform fee covers hosting, updates, security, and SLA. Each agent is priced by complexity tier, not per message, not per run.</p>
     </div>
@@ -45,7 +45,7 @@ const monthly = [
     </div>
 
     <h3 style="font-family:Sora, sans-serif;font-weight:600;font-size:18px;letter-spacing:-.005em;margin-bottom:4px">Per-agent usage.</h3>
-    <p style="font-size:14px;color:var(--wc-fg-3);margin-bottom:20px">Pick a tier per agent. Token budgets included; overage rates apply beyond.</p>
+    <p style="font-size:14px;color:var(--wc-fg-3);margin-bottom:20px">Pick a tier per agent. Each tier includes a fixed token allowance, sized to the agent&rsquo;s LLM complexity and third-party model pricing; if usage goes beyond that allowance, extra tokens are billed at pass-through cost without an additional platform surcharge.</p>
     <div class="grid grid-3" style="margin-bottom:48px">
       {perAgent.map(t => (
         <div class={"tier" + (t.hi ? " hi" : "")}>
