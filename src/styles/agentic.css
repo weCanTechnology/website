@@ -18,17 +18,18 @@ button{font:inherit;cursor:pointer;border:none;background:none;color:inherit;}
 /* ── Top nav ──────────────────────────────────────── */
 .nav{position:sticky;top:0;z-index:50;backdrop-filter:saturate(140%) blur(14px);-webkit-backdrop-filter:saturate(140%) blur(14px);background:rgba(255,255,255,.78);border-bottom:1px solid var(--wc-border);}
 .nav.dark{background:rgba(17,0,73,.55);border-bottom-color:rgba(255,255,255,.08);}
-.nav-row{max-width:1240px;margin:0 auto;padding:18px 32px;display:flex;align-items:center;justify-content:space-between;gap:24px;}
+.nav-row{max-width:1240px;margin:0 auto;padding:18px 32px;display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:24px;}
 .nav-logo{display:flex;align-items:center;gap:10px;font-family:var(--wc-font-display);font-weight:800;font-size:18px;color:var(--wc-fg-1);letter-spacing:-.01em;}
 .nav.dark .nav-logo{color:#fff;}
 .nav-logo .dot{width:8px;height:8px;border-radius:2px;background:var(--wc-teal-500);box-shadow:0 0 0 3px rgba(32,187,190,.18);}
 .nav-logo .sub{font-family:var(--wc-font-sans);font-weight:400;font-size:12px;color:var(--wc-fg-3);letter-spacing:0;}
 .nav.dark .nav-logo .sub{color:rgba(255,255,255,.55);}
-.nav-links{display:flex;gap:28px;font-size:14px;font-weight:500;color:var(--wc-fg-2);}
+.nav-links{display:flex;gap:28px;font-size:14px;font-weight:500;color:var(--wc-fg-2);justify-self:center;min-width:0;}
 .nav.dark .nav-links{color:rgba(255,255,255,.78);}
 .nav-links a{transition:color .2s var(--wc-ease-out);}
 .nav-links a:hover, .nav-links a.active{color:var(--wc-indigo-700);}
 .nav.dark .nav-links a:hover, .nav.dark .nav-links a.active{color:var(--wc-teal-200);}
+.nav-logo,.nav-cta{white-space:nowrap;}
 
 /* Mobile burger + drawer */
 .nav-burger{display:none;width:40px;height:40px;background:transparent;border:0;cursor:pointer;position:relative;flex-direction:column;justify-content:center;align-items:center;gap:4px;padding:0;z-index:51;}
@@ -177,7 +178,7 @@ button{font:inherit;cursor:pointer;border:none;background:none;color:inherit;}
 .footer-meta .sep{color:rgba(255,255,255,.25);}
 @media (max-width:720px){.footer-mini-inner{flex-direction:column;align-items:flex-start;gap:18px;}}
 
-html{scroll-behavior:smooth;scroll-padding-top:80px;}
+html{scroll-behavior:smooth;scroll-padding-top:80px;scrollbar-gutter:stable;}
 
 /* ── Page hero (subpage) ─────────────────────────── */
 .page-hero{position:relative;background:var(--wc-indigo-950);color:#fff;padding:140px 32px 96px;overflow:hidden;}
