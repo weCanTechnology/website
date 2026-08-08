@@ -1,19 +1,37 @@
 import signatureTemplate from "../data/signature-template.html?raw";
-import { buildSignatureHtml, formatPhoneDisplay } from "../lib/signature";
+import {
+  buildPlainTextSignature,
+  buildPreviewDocument,
+  buildSignatureHtml,
+  formatPhoneDisplay,
+} from "../lib/signature";
 
 export function setupSignaturePage() {
   const nameInput = document.getElementById("sig-name") as HTMLInputElement | null;
   const titleInput = document.getElementById("sig-title") as HTMLInputElement | null;
   const phoneInput = document.getElementById("sig-phone") as HTMLInputElement | null;
-  const preview = document.getElementById("signature-preview") as HTMLIFrameElement | null;
+  const previewLight = document.getElementById("signature-preview-light") as HTMLIFrameElement | null;
+  const previewDark = document.getElementById("signature-preview-dark") as HTMLIFrameElement | null;
   const htmlOutput = document.getElementById("signature-html") as HTMLTextAreaElement | null;
   const status = document.getElementById("copy-status") as HTMLDivElement | null;
   const copyHtmlButton = document.getElementById("copy-html") as HTMLButtonElement | null;
   const copyRichButton = document.getElementById("copy-rich") as HTMLButtonElement | null;
 
-  if (!nameInput || !titleInput || !phoneInput || !preview || !htmlOutput || !status || !copyHtmlButton || !copyRichButton) {
+  if (
+    !nameInput ||
+    !titleInput ||
+    !phoneInput ||
+    !previewLight ||
+    !previewDark ||
+    !htmlOutput ||
+    !status ||
+    !copyHtmlButton ||
+    !copyRichButton
+  ) {
     return;
   }
+
+  let plainText = "";
 
   const setStatus = (message: string, isError = false) => {
     status.textContent = message;
@@ -26,14 +44,18 @@ export function setupSignaturePage() {
       phoneInput.value = formattedPhone;
     }
 
-    const html = buildSignatureHtml(signatureTemplate, {
+    const fields = {
       name: nameInput.value,
       title: titleInput.value,
       phone: formattedPhone || phoneInput.value,
-    });
+    };
 
-    preview.srcdoc = html;
+    const html = buildSignatureHtml(signatureTemplate, fields);
+
+    previewLight.srcdoc = buildPreviewDocument(html, "light");
+    previewDark.srcdoc = buildPreviewDocument(html, "dark");
     htmlOutput.value = html;
+    plainText = buildPlainTextSignature(fields);
   };
 
   const applyQueryParams = () => {
@@ -80,17 +102,20 @@ export function setupSignaturePage() {
       if (window.ClipboardItem && navigator.clipboard?.write) {
         const item = new ClipboardItem({
           "text/html": new Blob([html], { type: "text/html" }),
-          "text/plain": new Blob([html], { type: "text/plain" }),
+          // Never put markup on the plain-text flavour. Paste paths that resolve to it
+          // (Ctrl+Shift+V, "Keep Text Only", plain-text compose) would otherwise dump
+          // raw HTML into the message instead of a signature.
+          "text/plain": new Blob([plainText], { type: "text/plain" }),
         });
         await navigator.clipboard.write([item]);
-        setStatus("Rendered signature copied.");
+        setStatus("Signature copied. Paste into Outlook with Ctrl+V (⌘V on Mac).");
         return;
       }
 
       await navigator.clipboard.writeText(html);
       setStatus("Rich copy unsupported here, source HTML copied instead.");
     } catch {
-      setStatus("Could not copy rendered signature.", true);
+      setStatus("Could not copy the signature.", true);
     }
   });
 

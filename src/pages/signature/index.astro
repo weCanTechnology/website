@@ -1,8 +1,10 @@
 ---
 import signatureTemplate from "../../data/signature-template.html?raw";
-import { buildSignatureHtml, defaultSignatureFields } from "../../lib/signature";
+import { buildPreviewDocument, buildSignatureHtml, defaultSignatureFields } from "../../lib/signature";
 
 const initialSignatureHtml = buildSignatureHtml(signatureTemplate, defaultSignatureFields);
+const initialPreviewLight = buildPreviewDocument(initialSignatureHtml, "light");
+const initialPreviewDark = buildPreviewDocument(initialSignatureHtml, "dark");
 ---
 
 <!doctype html>
@@ -200,42 +202,171 @@ const initialSignatureHtml = buildSignatureHtml(signatureTemplate, defaultSignat
         padding: 24px;
       }
 
+      .previews {
+        display: grid;
+        gap: 14px;
+      }
+
       .preview-shell {
-        padding: 24px;
+        position: relative;
+        padding: 34px 24px 20px;
         border: 1px solid rgba(22, 35, 32, 0.08);
         border-radius: 18px;
-        background: linear-gradient(180deg, #ffffff 0%, #fbfdfc 100%);
+        background: #ffffff;
+      }
+
+      .preview-shell-dark {
+        border-color: rgba(255, 255, 255, 0.14);
+        background: #1e1e1e;
+      }
+
+      .preview-label {
+        position: absolute;
+        top: 12px;
+        left: 24px;
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--text-2);
+      }
+
+      .preview-shell-dark .preview-label {
+        color: #7d8a86;
       }
 
       .preview-shell iframe {
+        display: block;
         width: 100%;
-        min-height: 230px;
+        min-height: 165px;
         border: 0;
         background: transparent;
       }
 
-      .output {
+      .preview-hints {
         margin-top: 18px;
-      }
-
-      .output-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        gap: 12px;
-        margin-bottom: 10px;
-      }
-
-      .output-header h2 {
-        margin: 0;
-        font-size: 15px;
-        font-weight: 700;
-      }
-
-      .output-header p {
-        margin: 0;
         font-size: 13px;
+        line-height: 1.7;
         color: var(--text-2);
+      }
+
+      .preview-hints h2 {
+        margin: 0 0 6px;
+        font-size: 14px;
+        font-weight: 700;
+        color: var(--text-1);
+      }
+
+      .preview-hints p {
+        margin: 0 0 8px;
+      }
+
+      .preview-hints ul {
+        margin: 0;
+        padding-left: 20px;
+      }
+
+      .preview-hints strong {
+        color: var(--text-1);
+      }
+
+      .preview-hints code {
+        font: 12px/1 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+        padding: 2px 5px;
+        border-radius: 6px;
+        background: rgba(22, 35, 32, 0.06);
+      }
+
+      .hint-note {
+        margin: 12px 0 0;
+      }
+
+      .instructions {
+        margin-top: 22px;
+      }
+
+      .instructions h2 {
+        margin: 0 0 8px;
+        font-size: 16px;
+        font-weight: 700;
+        letter-spacing: -0.01em;
+      }
+
+      .instructions-lede {
+        margin: 0 0 18px;
+        font-size: 14px;
+        line-height: 1.6;
+        color: var(--text-2);
+      }
+
+      .variant {
+        margin-bottom: 16px;
+      }
+
+      .variant h3,
+      .check h3 {
+        margin: 0 0 6px;
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 0.02em;
+      }
+
+      .instructions ol,
+      .instructions ul {
+        margin: 0;
+        padding-left: 20px;
+        font-size: 13px;
+        line-height: 1.7;
+        color: var(--text-2);
+      }
+
+      .instructions strong {
+        color: var(--text-1);
+      }
+
+      .check {
+        margin-top: 20px;
+        padding: 16px 18px;
+        border: 1px solid rgba(29, 158, 117, 0.18);
+        border-radius: 16px;
+        background: rgba(29, 158, 117, 0.06);
+      }
+
+      .check p {
+        margin: 0 0 8px;
+        font-size: 13px;
+        line-height: 1.7;
+        color: var(--text-2);
+      }
+
+      .check .warn {
+        margin: 12px 0 0;
+        padding-top: 12px;
+        border-top: 1px solid rgba(29, 158, 117, 0.18);
+      }
+
+      .output {
+        margin-top: 22px;
+        padding-top: 18px;
+        border-top: 1px solid rgba(22, 35, 32, 0.08);
+      }
+
+      .output summary {
+        cursor: pointer;
+        font-size: 13px;
+        font-weight: 700;
+        color: var(--text-2);
+      }
+
+      .output-note {
+        margin: 10px 0;
+        font-size: 13px;
+        line-height: 1.6;
+        color: var(--text-2);
+      }
+
+      .output .button {
+        margin-top: 10px;
       }
 
       textarea {
@@ -304,32 +435,112 @@ const initialSignatureHtml = buildSignatureHtml(signatureTemplate, defaultSignat
           </div>
 
           <div class="actions">
-            <button class="button button-primary" type="button" id="copy-html">Copy source HTML</button>
-            <button class="button button-secondary" type="button" id="copy-rich">Copy rendered signature</button>
+            <button class="button button-primary" type="button" id="copy-rich">Copy signature</button>
           </div>
 
           <div class="status" id="copy-status" aria-live="polite"></div>
-
-          <p class="help">
-            <strong>Recommended use:</strong> copy the rendered signature for rich email clients,
-            or copy the source HTML if your mail app accepts direct HTML input.
-          </p>
         </aside>
 
         <section class="panel preview-panel">
-          <div class="preview-shell">
-            <iframe id="signature-preview" title="Signature preview" srcdoc={initialSignatureHtml}></iframe>
+          <div class="previews">
+            <div class="preview-shell">
+              <span class="preview-label">Light mode</span>
+              <iframe
+                id="signature-preview-light"
+                title="Signature preview, light mode"
+                srcdoc={initialPreviewLight}></iframe>
+            </div>
+
+            <div class="preview-shell preview-shell-dark">
+              <span class="preview-label">Dark mode</span>
+              <iframe
+                id="signature-preview-dark"
+                title="Signature preview, dark mode"
+                srcdoc={initialPreviewDark}></iframe>
+            </div>
           </div>
 
-          <div class="output">
-            <div class="output-header">
-              <div>
-                <h2>Generated HTML</h2>
-                <p>Use this source if you need the raw signature markup.</p>
-              </div>
-            </div>
-            <textarea id="signature-html" spellcheck="false">{initialSignatureHtml}</textarea>
+          <div class="preview-hints">
+            <h2>Reading the two previews</h2>
+            <p>
+              Both are shown at once on purpose — you can't judge dark mode by switching your
+              own machine over, because most Outlook variants can't run the swap at all.
+              Compare the panes against this:
+            </p>
+            <ul>
+              <li><strong>Light:</strong> near-black name, mid-grey mark, green rule.</li>
+              <li><strong>Dark:</strong> near-white name, pale mark, same green rule.</li>
+              <li><strong>Each pane shows exactly one mark.</strong> Two stacked marks in either pane means the swap broke.</li>
+            </ul>
+            <p class="hint-note">
+              The dark pane is what clients supporting <code>prefers-color-scheme</code> render.
+              Where that isn't supported — including classic Outlook on Windows — you get the
+              light version, which is the intended fallback, not a fault.
+            </p>
           </div>
+
+          <div class="instructions">
+            <h2>How to insert it</h2>
+            <p class="instructions-lede">
+              Click <strong>Copy signature</strong>, then follow the steps for your Outlook.
+              Paste with plain <strong>Ctrl+V</strong> (<strong>⌘V</strong> on Mac) —
+              never Ctrl+Shift+V, and never “Keep Text Only”.
+            </p>
+
+            <div class="variant">
+              <h3>Classic Outlook (Windows desktop)</h3>
+              <ol>
+                <li>File → Options → Mail → Signatures…</li>
+                <li>Pick your signature, or click New.</li>
+                <li>Click inside the large edit box, then Ctrl+V.</li>
+                <li>OK, then close and reopen Outlook once.</li>
+              </ol>
+            </div>
+
+            <div class="variant">
+              <h3>New Outlook / Outlook on the web</h3>
+              <ol>
+                <li>Settings (gear icon) → Accounts → Signatures.</li>
+                <li>Click inside the signature box, then Ctrl+V.</li>
+                <li>Save.</li>
+              </ol>
+            </div>
+
+            <div class="variant">
+              <h3>Outlook for Mac</h3>
+              <ol>
+                <li>Outlook → Settings → Signatures.</li>
+                <li>Click +, or double-click an existing signature.</li>
+                <li>Click inside the edit area, then ⌘V.</li>
+                <li>Close the window to save.</li>
+              </ol>
+            </div>
+
+            <div class="check">
+              <h3>Check it worked</h3>
+              <p>Send yourself a test email, then confirm all three:</p>
+              <ul>
+                <li>You can <strong>select the text</strong> with your cursor. If you can't, it's an image — delete it and start over.</li>
+                <li>There is <strong>exactly one logo mark</strong>, not two.</li>
+                <li>The <strong>phone number is a link</strong> you can click.</li>
+              </ul>
+              <p class="warn">
+                Never take a screenshot of the preview and paste that in. An image signature
+                is unreadable to screen readers, blurry on other screens, gets blocked as a
+                remote image, and makes your phone number and website unclickable.
+              </p>
+            </div>
+          </div>
+
+          <details class="output">
+            <summary>Advanced: signature source HTML</summary>
+            <p class="output-note">
+              Only needed if your mail tool accepts raw HTML directly. For Outlook, use the
+              Copy signature button above instead.
+            </p>
+            <textarea id="signature-html" spellcheck="false">{initialSignatureHtml}</textarea>
+            <button class="button button-secondary" type="button" id="copy-html">Copy source HTML</button>
+          </details>
         </section>
       </section>
     </main>

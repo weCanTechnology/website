@@ -73,6 +73,85 @@ export function normalizePhoneHref(value: string) {
   return cleaned.replace(/\+/g, "");
 }
 
+export type PreviewMode = "light" | "dark";
+
+const DARK_MEDIA_QUERY = "@media (prefers-color-scheme: dark)";
+
+/**
+ * Splits the template's dark-mode media query into the text before it, the rules inside
+ * it, and the text after it. Brace-matched rather than regexed, because the block
+ * contains nested rule braces.
+ */
+function splitDarkModeBlock(html: string) {
+  const start = html.indexOf(DARK_MEDIA_QUERY);
+  if (start === -1) {
+    return null;
+  }
+
+  const open = html.indexOf("{", start + DARK_MEDIA_QUERY.length);
+  if (open === -1) {
+    return null;
+  }
+
+  let depth = 0;
+  for (let i = open; i < html.length; i += 1) {
+    if (html[i] === "{") {
+      depth += 1;
+    } else if (html[i] === "}") {
+      depth -= 1;
+      if (depth === 0) {
+        return {
+          before: html.slice(0, start),
+          rules: html.slice(open + 1, i),
+          after: html.slice(i + 1),
+        };
+      }
+    }
+  }
+
+  return null;
+}
+
+/**
+ * Renders the signature for one specific colour mode, so both previews are visible at
+ * once regardless of the viewer's OS setting.
+ *
+ * The dark preview applies the media query's rules unconditionally — they keep their
+ * !important declarations, so they win over the inline styles exactly as they do in a
+ * real dark-mode client. The light preview drops the block entirely.
+ */
+export function buildPreviewDocument(html: string, mode: PreviewMode) {
+  const parts = splitDarkModeBlock(html);
+  const document = parts
+    ? mode === "dark"
+      ? `${parts.before}${parts.rules}${parts.after}`
+      : `${parts.before}${parts.after}`
+    : html;
+
+  const background = mode === "dark" ? "#1e1e1e" : "#ffffff";
+  const backdrop = `<style>html,body{background:${background};}</style>`;
+
+  return document.includes("</head>")
+    ? document.replace("</head>", `${backdrop}</head>`)
+    : `${backdrop}${document}`;
+}
+
+/**
+ * Plain-text rendering of the signature.
+ *
+ * This is what goes on the clipboard's `text/plain` flavour. Some paste paths resolve to
+ * that flavour instead of `text/html` — Ctrl+Shift+V, "Keep Text Only", plain-text
+ * compose windows — and they must land a readable signature, never raw markup.
+ */
+export function buildPlainTextSignature(fields: SignatureFields) {
+  return [
+    fields.name.trim() || "Your Name",
+    fields.title.trim() || "Your Title",
+    formatPhoneDisplay(fields.phone) || "+36 30 123 4567",
+    "wecan.technology",
+  ].join("\n");
+}
+
 export function buildSignatureHtml(template: string, fields: SignatureFields) {
   const safeName = escapeHtml(fields.name.trim() || "Your Name");
   const safeTitle = escapeHtml(fields.title.trim() || "Your Title");
